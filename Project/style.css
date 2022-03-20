@@ -1,38 +1,37 @@
-html{
+html {
   height: 100%;
 }
 
-body{
+body {
   margin: 0;
   padding: 0;
-  background-image:url(/img/1.png);
+  background-image: url(/img/1.png);
 }
-
-
 
 html {
   height: 100%;
-
 }
 
-
-
-.container{
-  
-  position:relative;
-  height:100%;  
+.container {
+  position: relative;
+  height: 100%;
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: center;
-  
-  
 }
 
-
+#photosensor {
+  position: absolute;
+  width: 100px;
+  height: 30px;
+  top: 300px;
+  border-radius: 5px;
+  background: rgb(196, 196, 255);
+}
 
 #img {
-  position:relative;
+  position: relative;
   display: block;
   width: 800px;
   height: 600px;
@@ -41,60 +40,64 @@ html {
   border-radius: 5px;
 }
 
-
-
 #wheel {
   position: absolute;
   background: rgb(45, 45, 53);
   border-radius: 50%;
   width: 140px;
   height: 140px;
-  left:330px;
+  left: 330px;
 }
 
 #stand {
   position: absolute;
   width: 30px;
   height: 480px;
-  top:95px;
-  left:385px;
+  top: 95px;
+  left: 385px;
   background: rgb(45, 45, 53);
-  
 }
 
 #base {
   position: absolute;
   width: 400px;
   height: 30px;
-  bottom:0;
-  left:200px;
-  border-radius: 5px;
-
+  bottom: 0;
+  left: 200px;
+  border-radius: 10px;
   background: rgb(45, 45, 53);
-
 }
 
 #cargo_1 {
   position: absolute;
-  width: 60px;
-  height: 90px;
+  width: 40px;
+  height: 50px;
   background: rgb(0, 0, 255);
-  left:440px;
-  top:100px;
-  top:150px;
+  left: 440px;
+  top: 100px;
+  top: 150px;
   border-radius: 5px;
 }
 #cargo_2 {
   position: absolute;
-  width: 60px;
-  height: 90px;
+  width: 40px;
+  height: 50px;
   background: rgb(255, 0, 0);
-  left:305px;
-  top:480px;
+  left: 305px;
+  top: 520px;
   border-radius: 5px;
 }
+
+.test_obj {
+  position: absolute;
+  width: 10px;
+  height: 430px;
+  background: black;
+  top: 45px;
+}
+
 .button {
-  position:absolute;
+  position: absolute;
   background-color: #fffb00; /* Green */
   border: none;
   color: rgb(0, 0, 0);
@@ -103,12 +106,52 @@ html {
   text-decoration: none;
   display: inline-block;
   font-size: 15px;
-  top:571px;
+  top: 571px;
   border-radius: 5px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  transition: all 500ms ease; 
+  transition: all 500ms ease;
 }
 .button:hover {
-  background-color: #000000; 
+  background-color: #000000;
   color: white;
+}
+
+.button2 {
+  position: absolute;
+  background-color: #09ff00; /* Green */
+  border: none;
+  color: rgb(0, 0, 0);
+  padding: 6px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  top: 540px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  transition: all 500ms ease;
+}
+.button2:hover {
+  background-color: #000000;
+  color: white;
+}
+
+.stopwatch {
+  position: absolute;
+  display: inline-block;
+  background-color: white;
+  border: 1px solid #eee;
+  padding: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+}
+
+.stopwatch span {
+  font-weight: bold;
+  display: block;
+}
+
+.stopwatch a {
+  padding-right: 5px;
+  text-decoration: none;
 }
