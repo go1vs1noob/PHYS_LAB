@@ -98,11 +98,12 @@ function move() {
   timer.start();
   button.disabled = true;
   function animate() {
-    if (currentCargo1 === cargoToStop + 1) {
+    if (currentCargo1 === cargoToStop) {
       //Если правый грузик достиг места остановки,
       clearInterval(animate); // то прерываем
     } else {
-      if (currentCargo1 === sensorPos + 1) {
+      if (currentCargo1 >= sensorPos) {
+
         timer.stop();
       }
       currentCargo2 -= pixelsToMove; // В ином случае двигаем правый грузик вниз, а левый вверх
