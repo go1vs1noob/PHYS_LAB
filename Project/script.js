@@ -94,7 +94,7 @@ function move() {
   let currentCargo2 = cargo_2.offsetTop; // Значение для начала движения левого грузика
   let pixelsToMove = 0.5; // На сколько пикселей двигать грузики при каждом вызове функции
   let sensorPos = sensor.offsetTop;
-  setInterval(animate, 0); // Вызываем animate пока не прирвём
+  setInterval(animate, 1); // Вызываем animate пока не прирвём
   timer.start();
   button.disabled = true;
   function animate() {
