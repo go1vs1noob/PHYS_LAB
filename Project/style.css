@@ -26,9 +26,10 @@ html {
   width: 100px;
   height: 30px;
   left: 385px;
-  top: 400px;
+  top: 446px;
   border-radius: 5px;
-  background: rgb(196, 196, 255);
+  background: rgba(196, 196, 255, 0.527);
+
 }
 
 #img {
@@ -37,6 +38,7 @@ html {
   width: 800px;
   height: 600px;
   background: rgba(160, 68, 68, 0.418);
+
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   border-radius: 5px;
 }
@@ -72,29 +74,31 @@ html {
 #cargo_1 {
   position: absolute;
   width: 40px;
-  height: 50px;
+  height: 45px;
   background: rgb(0, 0, 255);
   left: 440px;
-  top: 100px;
-  top: 150px;
+  top: 162px;
   border-radius: 5px;
 }
 #cargo_2 {
   position: absolute;
   width: 40px;
-  height: 50px;
+  height: 45px;
   background: rgb(255, 0, 0);
   left: 305px;
-  top: 520px;
+  top: 525px;
   border-radius: 5px;
 }
 
 .test_obj {
   position: absolute;
-  width: 10px;
+  width: 20px;
   height: 430px;
-  background: black;
-  top: 45px;
+  background-image: url(/img/ruler_50cm.png);
+  background-size: cover;
+  top: 140px;
+  left:385px;
+
 }
 
 .button {
@@ -155,4 +159,16 @@ html {
 .stopwatch a {
   padding-right: 5px;
   text-decoration: none;
+}
+
+
+#sensor-line {
+  position: absolute;
+  width: 100px;
+  height: 1px;
+  left: 385px;
+  top: 461px;
+  background: rgb(0, 255, 21);
+  border-radius: 5px;
+  
 }
