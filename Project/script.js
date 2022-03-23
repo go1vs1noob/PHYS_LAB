@@ -87,14 +87,15 @@ const button = document.querySelector("button"); //КНОПКА START
 function move() {
   let cargo_1 = document.getElementById("cargo_1"); // Добавляем грузики
   let cargo_2 = document.getElementById("cargo_2");
-  let sensor = document.getElementById("photosensor");
+  let sensor = document.getElementById("sensor-line");
 
   let currentCargo1 = cargo_1.offsetTop; // Считываем координаты верха правого грузика
   let cargoToStop = cargo_2.offsetTop; // Считываем координаты верха левого грузика. Это мера для остановки правого.
   let currentCargo2 = cargo_2.offsetTop; // Значение для начала движения левого грузика
-  let pixelsToMove = 0.5; // На сколько пикселей двигать грузики при каждом вызове функции
+  let pixelsToMove = 1; // На сколько пикселей двигать грузики при каждом вызове функции
   let sensorPos = sensor.offsetTop;
-  setInterval(animate, 1); // Вызываем animate пока не прирвём
+
+  setInterval(animate, 10); // Вызываем animate пока не прирвём
   timer.start();
   button.disabled = true;
   function animate() {
@@ -122,3 +123,5 @@ function reset() {
   const button = document.querySelector("button");
   button.disabled = false;
 }
+
+
