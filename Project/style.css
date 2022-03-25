@@ -5,169 +5,158 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-image: url(/img/1.png);
+  background-image: url(/img/1.png);   /* Задаём фон для тела */
 }
 
-html {
-  height: 100%;
-}
 
-.container {
-  position: relative;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-}
+/*У ВСЕГО ПОЗИЦИЯ АБСОЛЮТНАЯ НА СЛУЧАЙ ЕСЛИ НУЖНО ПОЛУЧИТЬ МЕСТОПОЛОЖЕНИЕ С ПОМОЩЬЮ OFFSET (см в script)*/
 
-#photosensor {
+#photosensor {             /* Фотодатчик */
   position: absolute;
-  width: 100px;
-  height: 30px;
-  left: 385px;
-  top: 446px;
+  width: 150px;
+  height: 45px;
+  left: 577px;
+  top: 669px;
   border-radius: 5px;
   background: rgba(196, 196, 255, 0.527);
 
 }
 
-#img {
-  position: relative;
-  display: block;
-  width: 800px;
-  height: 600px;
-  background: rgba(160, 68, 68, 0.418);
-
+#img {               /* Фон для квадрата (где происходит лаба) */
+  position: absolute;
+  left:360px;
+  width: 1200px;
+  height: 900px;
+  background: rgba(43, 28, 49, 0.233);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   border-radius: 5px;
 }
 
-#wheel {
+#wheel {            /* Шестеренка */
   position: absolute;
   background: rgb(45, 45, 53);
   border-radius: 50%;
-  width: 140px;
-  height: 140px;
-  left: 330px;
+  width: 210px;
+  height: 210px;
+  left: 495px;
 }
 
-#stand {
+#stand {            /* Стойка (вертикальная) */
   position: absolute;
-  width: 30px;
-  height: 480px;
-  top: 95px;
-  left: 385px;
+  width: 45px;
+  height: 720px;
+  top: 143px;
+  left: 577px;
   background: rgb(45, 45, 53);
 }
 
-#base {
+#base {             /* Стойка (горизонтальная) */
   position: absolute;
-  width: 400px;
-  height: 30px;
+  width: 600px;
+  height: 45px;
   bottom: 0;
-  left: 200px;
+  left: 300px;
   border-radius: 10px;
   background: rgb(45, 45, 53);
 }
 
-#cargo_1 {
+#cargo_1 {          /* Левый грузик */
   position: absolute;
-  width: 40px;
-  height: 45px;
+  width: 60px;
+  height: 68px;
   background: rgb(0, 0, 255);
-  left: 440px;
-  top: 162px;
+  left: 680px;
+  top: 243px;
   border-radius: 5px;
 }
-#cargo_2 {
+#cargo_2 {          /* Правый грузик */
   position: absolute;
-  width: 40px;
-  height: 45px;
+  width: 60px;
+  height: 68px;
   background: rgb(255, 0, 0);
-  left: 305px;
-  top: 525px;
+  left: 458px;
+  top: 787px;
   border-radius: 5px;
 }
 
-.test_obj {
+#ruler {            /* Линейка */
   position: absolute;
-  width: 20px;
-  height: 430px;
+  width: 30px;
+  height: 645px;
   background-image: url(/img/ruler_50cm.png);
   background-size: cover;
-  top: 140px;
-  left:385px;
-
+  top: 210px;
+  left:577px;
 }
 
-.button {
+.button {          /* Кнопка START */
   position: absolute;
   background-color: #fffb00; /* Green */
   border: none;
   color: rgb(0, 0, 0);
-  padding: 6px 30px;
+  padding: 9px 45px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 15px;
-  top: 571px;
+  font-size: 22px;
+  top: 855px;
   border-radius: 5px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   transition: all 500ms ease;
 }
-.button:hover {
+.button:hover {   /* При наведении на кнопку */
   background-color: #000000;
   color: white;
 }
 
-.button2 {
+.button2 {        /* Кнопка RESET */
   position: absolute;
   background-color: #09ff00; /* Green */
   border: none;
   color: rgb(0, 0, 0);
-  padding: 6px 30px;
+  padding: 9px 45px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 15px;
-  top: 540px;
+  font-size: 21px;
+  top: 805px;
   border-radius: 5px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   transition: all 500ms ease;
 }
-.button2:hover {
+.button2:hover {    /* При наведении на кнопку */
   background-color: #000000;
   color: white;
 }
 
-.stopwatch {
+.stopwatch {         /* Секундомер */
   position: absolute;
   display: inline-block;
   background-color: white;
   border: 1px solid #eee;
-  padding: 5px;
+  padding: 3px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   border-radius: 5px;
+  font-size: 21px;
 }
 
 .stopwatch span {
   font-weight: bold;
   display: block;
 }
-
+                         /*Декорация секундомера, потом разберемся*/
 .stopwatch a {
   padding-right: 5px;
   text-decoration: none;
 }
 
 
-#sensor-line {
+#sensor-line {        /*Линия фотодатчика (на которой останавливается отчет)*/
   position: absolute;
-  width: 100px;
-  height: 1px;
-  left: 385px;
-  top: 461px;
+  width: 150px;
+  height: 2px;
+  left: 577px;
+  top: 691px;
   background: rgb(0, 255, 21);
   border-radius: 5px;
   

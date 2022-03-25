@@ -12,21 +12,20 @@
     ></script>
   </head>
   <body>
-    <div class="container">
         <div id="img">
           <div id="base"></div>
           <div id="wheel"></div>
           <div id="cargo_2"></div>
           <div id="cargo_1"></div>
-          <div id="stand"></div>
+          <div id="stand"></div>              <!-- Заводим все объекты + скрипт -->
           <div id="sensor-line"></div>
-          <div class="test_obj"></div>
+          <div id="ruler"></div>
           <div id="photosensor"></div>
           <div class="stopwatch" id="my-stopwatch"></div>
-          <button class="button" onclick="move()">START</button>
-          <button class="button2" onclick="reset()">RESET</button>
+          <button class="button" onclick="move()">START</button>   <!-- ПРИ НАЖАТИИ НА КНОПКУ START ЗАПУСКАЕТСЯ ФУНКЦИЯ move() В script.js-->
+          <button class="button2" onclick="reset()">RESET</button>  <!-- ПРИ НАЖАТИИ НА КНОПКУ RESET ЗАПУСКАЕТСЯ ФУНКЦИЯ reset() В script.js-->
       </div>
-    </div>
     <script src="script.js"></script>
+    <script src="server.js"></script>
   </body>
 </html>
