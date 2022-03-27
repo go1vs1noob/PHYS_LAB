@@ -1,0 +1,261 @@
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url(/img/1.png);
+}
+
+html {
+    height: 100%;
+}
+
+.container {
+    position: relative;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+#photosensor {
+    position: absolute;
+    width: 100px;
+    height: 30px;
+    left: 385px;
+    top: 446px;
+    border-radius: 5px;
+    background: rgba(196, 196, 255, 0.527);
+
+}
+
+#img {
+    position: relative;
+    display: block;
+    width: 800px;
+    height: 600px;
+    background: rgba(160, 68, 68, 0.418);
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
+#wheel {
+    position: absolute;
+    background: rgb(45, 45, 53);
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+    left: 330px;
+}
+
+#stand {
+    position: absolute;
+    width: 30px;
+    height: 480px;
+    top: 95px;
+    left: 385px;
+    background: rgb(45, 45, 53);
+}
+
+#base {
+    position: absolute;
+    width: 400px;
+    height: 30px;
+    bottom: 0;
+    left: 200px;
+    border-radius: 10px;
+    background: rgb(45, 45, 53);
+}
+
+#cargo_1 {
+    position: absolute;
+    width: 40px;
+    height: 45px;
+    background: rgb(0, 0, 255);
+    left: 440px;
+    top: 162px;
+    border-radius: 5px;
+}
+#cargo_2 {
+    position: absolute;
+    width: 40px;
+    height: 45px;
+    background: rgb(255, 0, 0);
+    left: 305px;
+    top: 525px;
+    border-radius: 5px;
+}
+#car {
+    position: absolute;
+    width: 40px;
+    height: 15px;
+    background: rgb(0, 255, 0);
+    left: 305px;
+    top: 510px;
+    visibility: hidden;
+    border-radius: 5px;
+}
+#car2 {
+    position: absolute;
+    width: 40px;
+    height: 15px;
+    background: rgb(0, 255, 0);
+    left: 305px;
+    top: 495px;
+    visibility: hidden;
+    border-radius: 5px;
+}
+#car3 {
+    position: absolute;
+    width: 40px;
+    height: 15px;
+    background: rgb(0, 255, 0);
+    left: 305px;
+    top: 480px;
+    visibility: hidden;
+    border-radius: 5px;
+}
+.test_obj {
+    position: absolute;
+    width: 20px;
+    height: 430px;
+    background-image: url(/img/ruler_50cm.png);
+    background-size: cover;
+    top: 140px;
+    left:385px;
+
+}
+.but1{
+    position: absolute;
+    top: 400px;
+    background-color: coral;
+    border :none;
+    color: rgb(0,0,0);
+    padding: 6px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    transition: all 500ms ease;
+
+
+}
+.but1:hover {
+    background-color: sienna;
+    color: white;
+}
+.but2{
+    position: absolute;
+    top: 450px;
+    background-color: coral;
+    border :none;
+    color: rgb(0,0,0);
+    padding: 6px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    transition: all 500ms ease;
+}
+.but2:hover {
+    background-color: sienna;
+    color: white;
+}
+.but3{
+    position: absolute;
+    top: 500px;
+    background-color: coral;
+    border :none;
+    color: rgb(0,0,0);
+    padding: 6px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    transition: all 500ms ease;
+}
+.but3:hover {
+    background-color: sienna;
+    color: white;
+}
+.button {
+    position: absolute;
+    background-color: #fffb00; /* Green */
+    border: none;
+    color: rgb(0, 0, 0);
+    padding: 6px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    top: 571px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    transition: all 500ms ease;
+}
+.button:hover {
+    background-color: #000000;
+    color: white;
+}
+
+.button2 {
+    position: absolute;
+    background-color: #09ff00; /* Green */
+    border: none;
+    color: rgb(0, 0, 0);
+    padding: 6px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    top: 540px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    transition: all 500ms ease;
+}
+.button2:hover {
+    background-color: #000000;
+    color: white;
+}
+
+.stopwatch {
+    position: absolute;
+    display: inline-block;
+    background-color: white;
+    border: 1px solid #eee;
+    padding: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
+.stopwatch span {
+    font-weight: bold;
+    display: block;
+}
+
+.stopwatch a {
+    padding-right: 5px;
+    text-decoration: none;
+}
+
+
+#sensor-line {
+    position: absolute;
+    width: 100px;
+    height: 1px;
+    left: 385px;
+    top: 461px;
+    background: rgb(0, 255, 21);
+    border-radius: 5px;
+
+}
