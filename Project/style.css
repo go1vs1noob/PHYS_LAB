@@ -5,13 +5,13 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-image: url(/img/1.png);   /* Задаём фон для тела */
+  background-image: url(/Project/img/1.png); /* Задаём фон для тела */
 }
-
 
 /*У ВСЕГО ПОЗИЦИЯ АБСОЛЮТНАЯ НА СЛУЧАЙ ЕСЛИ НУЖНО ПОЛУЧИТЬ МЕСТОПОЛОЖЕНИЕ С ПОМОЩЬЮ OFFSET (см в script)*/
 
-#photosensor {             /* Фотодатчик */
+#photosensor {
+  /* Фотодатчик */
   position: absolute;
   width: 150px;
   height: 45px;
@@ -19,12 +19,12 @@ body {
   top: 669px;
   border-radius: 5px;
   background: rgba(196, 196, 255, 0.527);
-
 }
 
-#img {               /* Фон для квадрата (где происходит лаба) */
+#img {
+  /* Фон для квадрата (где происходит лаба) */
   position: absolute;
-  left:360px;
+  left: 360px;
   width: 1200px;
   height: 900px;
   background: rgba(43, 28, 49, 0.233);
@@ -32,7 +32,8 @@ body {
   border-radius: 5px;
 }
 
-#wheel {            /* Шестеренка */
+#wheel {
+  /* Шестеренка */
   position: absolute;
   background: rgb(45, 45, 53);
   border-radius: 50%;
@@ -41,7 +42,8 @@ body {
   left: 495px;
 }
 
-#stand {            /* Стойка (вертикальная) */
+#stand {
+  /* Стойка (вертикальная) */
   position: absolute;
   width: 45px;
   height: 720px;
@@ -50,7 +52,8 @@ body {
   background: rgb(45, 45, 53);
 }
 
-#base {             /* Стойка (горизонтальная) */
+#base {
+  /* Стойка (горизонтальная) */
   position: absolute;
   width: 600px;
   height: 45px;
@@ -60,38 +63,77 @@ body {
   background: rgb(45, 45, 53);
 }
 
-#cargo_1 {          /* Левый грузик */
+.cargo {
   position: absolute;
   width: 60px;
   height: 68px;
+  background: rgb(0, 0, 0);
+  border-radius: 5px;
+}
+#cargo_blue {
+  /* Правый грузик */
   background: rgb(0, 0, 255);
   left: 680px;
   top: 243px;
-  border-radius: 5px;
 }
-#cargo_2 {          /* Правый грузик */
-  position: absolute;
-  width: 60px;
-  height: 68px;
+#cargo_red {
+  /* Левый грузик */
   background: rgb(255, 0, 0);
   left: 458px;
   top: 787px;
+}
+
+.weight{
+  position: absolute;
+  width: 60px;
+  height: 20px;
+  background: rgb(0, 0, 0);
   border-radius: 5px;
 }
 
-#ruler {            /* Линейка */
+#weight_1{
+  background: rgb(0, 0, 0);
+  
+  visibility: hidden;
+}
+#weight_2{
+  background: rgb(208, 0, 245);
+  top:400px;
+  visibility: hidden;
+}
+#weight_3{
+  background: rgb(132, 0, 255);
+  top:500px;
+  visibility: hidden;
+}
+
+#ruler {
+  /* Линейка */
   position: absolute;
   width: 30px;
   height: 645px;
-  background-image: url(/img/ruler_50cm.png);
+  background-image: url(img/ruler_50cm.png);
   background-size: cover;
   top: 210px;
-  left:577px;
+  left: 577px;
 }
 
-.button {          /* Кнопка START */
+#sensor-line {
+  /*Линия фотодатчика (на которой останавливается отчет)*/
   position: absolute;
-  background-color: #fffb00; /* Green */
+  width: 150px;
+  height: 2px;
+  left: 577px;
+  top: 691px;
+  background: rgb(0, 255, 21);
+  border-radius: 5px;
+}
+
+
+.button {
+  /* Кнопка START */
+  position: absolute;
+  background-color: #ff0000; /* Green */
   border: none;
   color: rgb(0, 0, 0);
   padding: 9px 45px;
@@ -99,37 +141,49 @@ body {
   text-decoration: none;
   display: inline-block;
   font-size: 22px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  transition: all 500ms ease;
+}
+.button:hover {
+  /* При наведении на кнопку */
+  background-color: #000000;
+  color: white;
+}
+
+#button_start{
+  background-color: #fbff00;
   top: 855px;
-  border-radius: 5px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  transition: all 500ms ease;
-}
-.button:hover {   /* При наведении на кнопку */
-  background-color: #000000;
-  color: white;
 }
 
-.button2 {        /* Кнопка RESET */
-  position: absolute;
-  background-color: #09ff00; /* Green */
-  border: none;
-  color: rgb(0, 0, 0);
-  padding: 9px 45px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 21px;
+#button_reset{
+  background-color: #48ff00;
   top: 805px;
-  border-radius: 5px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  transition: all 500ms ease;
-}
-.button2:hover {    /* При наведении на кнопку */
-  background-color: #000000;
-  color: white;
 }
 
-.stopwatch {         /* Секундомер */
+#button_weight_1{
+  
+  background-color: chocolate;
+  top:855px;
+  left: 1030px;
+}
+
+#button_weight_2{
+  
+  background-color: chocolate;
+  top:805px;
+  left: 1030px;
+}
+
+#button_weight_3{
+  
+  background-color: chocolate;
+  top:755px;
+  left: 1030px;
+}
+
+.stopwatch {
+  /* Секундомер */
   position: absolute;
   display: inline-block;
   background-color: white;
@@ -144,20 +198,10 @@ body {
   font-weight: bold;
   display: block;
 }
-                         /*Декорация секундомера, потом разберемся*/
+/*Декорация секундомера, потом разберемся*/
 .stopwatch a {
   padding-right: 5px;
   text-decoration: none;
 }
 
 
-#sensor-line {        /*Линия фотодатчика (на которой останавливается отчет)*/
-  position: absolute;
-  width: 150px;
-  height: 2px;
-  left: 577px;
-  top: 691px;
-  background: rgb(0, 255, 21);
-  border-radius: 5px;
-  
-}

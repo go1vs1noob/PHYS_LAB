@@ -84,50 +84,120 @@ var Stopwatch = function (elem, options) {
 
 var elem = document.getElementById("my-stopwatch"); // ПОЛУЧАЕМ СЕКУНДОМЕР С ПОМОЩЬЮ getElementById И ЕГО НАЗВАНИЯ В HTML
 var timer = new Stopwatch(elem, { delay: 10 }); // <-- ИНИЦИАЛИЗИРУЕМ. DELAY - ТО, КАК ЧАСТО ОБНОВЛЯЕТСЯ СЧЕТЧИК НА ЭКРАНЕ
-const GlobalCargo1Pos = document.getElementById("cargo_1").offsetTop; // ПОЛУЧАЕМ ПЕРВОНАЧАЛЬНЫЕ ПОЗИЦИЯ ПРАВОГО И ЛЕВОГО ГРУЗИКОВ ОТНОСИТЕЛЬНО
-const GlobalCargo2Pos = document.getElementById("cargo_2").offsetTop; // ВЕРХА ЭКРАНА С ПОМОЩЬЮ offsetTop
+const GlobalCargobluePos = document.getElementById("cargo_blue").offsetTop; // ПОЛУЧАЕМ ПЕРВОНАЧАЛЬНЫЕ ПОЗИЦИЯ ПРАВОГО И ЛЕВОГО ГРУЗИКОВ ОТНОСИТЕЛЬНО
+const GlobalCargoredPos = document.getElementById("cargo_red").offsetTop; // ВЕРХА ЭКРАНА С ПОМОЩЬЮ offsetTop
 
-const buttonStart = document.querySelector("button"); //ИНИЗИАЛИЗИРУЕМ КНОПКУ START
+const buttonStart = document.querySelector("button_start"); //ИНИЗИАЛИЗИРУЕМ КНОПКУ START
+const buttonReset = document.querySelector("button_reset"); //ИНИЦИАЛИЗИРУЕМ КНОПКУ RESER
+
+let added_mass = 0; // ИНИЦИАЛИЗИРУЕМ МАССУ, ДОБАВЛЕННУЮ ГРУЗИКАМИ
+let wht1_flag = 0;  // ИНИЦИАЛИЗИРУЕМ ФЛАГИ, ОЗНАЧАЮЩИЕ, ЧТО ГРУЗИК X БЫЛ ВКЛЮЧЕН (потом мб понадобится)
+let wht2_flag = 0;  
+let wht3_flag = 0;  
+
+
 
 function move() {
-  let cargo_1 = document.getElementById("cargo_1"); // ИНИЦИАЛИЗИРУЕМ ГРУЗИКИ С ПОМОЩЬЮ getElementById
-  let cargo_2 = document.getElementById("cargo_2");
+  
+  let weight_1 = document.getElementById("weight_1");   // ИНИЦИАЛИЗИРУЕМ ГРУЗИКИ 
+  let weight_2 = document.getElementById("weight_2");
+  let weight_3 = document.getElementById("weight_3");
+  let currentWeight_1 = weight_1.offsetTop;            // И ИХ ТЕКУЩИЕ ПОЗИЦИИ
+  let currentWeight_2 = weight_2.offsetTop;
+  let currentWeight_3 = weight_3.offsetTop;
+
+
+
+  
+  let cargo_blue = document.getElementById("cargo_blue"); // ИНИЦИАЛИЗИРУЕМ ГРУЗИКИ С ПОМОЩЬЮ getElementById
+  let cargo_red = document.getElementById("cargo_red"); 
   let sensor = document.getElementById("sensor-line"); // ИНИЦИАЛИЗИРУЕМ ЛИНИЮ ФОТОСЕНСОРА С ПОМОЩЬЮ getElementById
 
-  let currentCargo1 = cargo_1.offsetTop; // Считываем координаты правого грузика
-  let currentCargo2 = cargo_2.offsetTop; // Считываем координаты левого грузика (чтобы начать движение от них)
+  let currentCargoblue = cargo_blue.offsetTop; // Считываем координаты правого грузика
+  let currentCargored = cargo_red.offsetTop; // Считываем координаты левого грузика (чтобы начать движение от них)
 
-  const cargoToStop = GlobalCargo2Pos; // Координаты для остановки правого грузика (изначальные координаты левого)
 
-  let pixelsToMove = 1; // На сколько пикселей двигать грузики при каждом вызове функции
-  let sensorPos = sensor.offsetTop;
+
+
+
+  const cargoToStop = GlobalCargoredPos; // Координаты для остановки правого грузика (изначальные координаты левого)
+
+  let pixelsToMove = 0; // На сколько пикселей двигать грузики при каждом вызове функции
+  let sensorPos = sensor.offsetTop; // Позиция сенсора
 
   setInterval(animate, 10); // Каждые 10мс вызывается функция animate(), пока не прирвём с помощью clearInterval(animate). Значение 10 можно менять
   timer.start(); // Запускаем секундомер
   buttonStart.disabled = true; // Отключаем кнопку START
+
   function animate() {
-    if (currentCargo1 >= cargoToStop) {
+    pixelsToMove += 0.01 + added_mass/3000;  // placeholder формула. Зависит от массы. Каждую итерацию прибавляет к скорости данное число
+    if (currentCargoblue >= cargoToStop) {
       //Если правый грузик достиг места остановки,
-      clearInterval(animate); // то прерываем animate() [движение]
+      clearInterval(animate); // то прерываем animate() [движение]  TODO: ПОФИКСИТЬ ВРЕЗАНИЕ В СТОЙКУ. СКОРЕЕ ВСЕГО ПРОИСХОДИТ, ПОТОМУ ЧТО ДВИГАЕТСЯ БОЛЬШЕ ЧЕМ НА 1 ПИКСЕЛЬ ЗА ИТЕРАЦИЮ
     } else {
-      if (currentCargo1 >= sensorPos) {
+      if (currentCargoblue >= sensorPos) {
         //Если правый грузик достиг линии сенсора фотодатчика
         timer.stop(); // то останавливаем секундомер
       }
-      currentCargo2 -= pixelsToMove; // В ином случае двигаем правый грузик вниз, а левый вверх на {pixelsToMove} пикселей (значение изменяемое)
-      currentCargo1 += pixelsToMove;
-      cargo_2.style.top = currentCargo2 + "px"; // Переприсваиваем новое положение в css с помощью style.top
-      cargo_1.style.top = currentCargo1 + "px";
+
+      currentCargored -= pixelsToMove; // В ином случае двигаем правый грузик вниз, а левый вверх на {pixelsToMove} пикселей (значение изменяемое)
+      currentCargoblue += pixelsToMove;
+      
+      currentWeight_1 += pixelsToMove;
+      currentWeight_2 += pixelsToMove;  // ВМЕСТЕ С НИМИ ДВИГАЕМ И ДОБАВЛЕННЫЕ ГРУЗИКИ
+      currentWeight_3 += pixelsToMove;
+      
+      
+      cargo_red.style.top = currentCargored + "px"; // Переприсваиваем новое положение в css с помощью style.top
+      cargo_blue.style.top = currentCargoblue + "px";
+      weight_1.style.top = currentWeight_1 + "px";   // ОБНОВЛЯЕМ ИХ ПОЗИЦИИ В CSS
+      weight_2.style.top = currentWeight_2 + "px";
+      weight_3.style.top = currentWeight_3 + "px";
     }
   }
 }
 
 function reset() {
   // Возвращаем таймер и грузики в изначальное положение
-  let cargo_1 = document.getElementById("cargo_1"); // Инизиализируем грузики
-  let cargo_2 = document.getElementById("cargo_2");
-  cargo_1.style.top = GlobalCargo1Pos + "px"; // Возвращаем на изначальные позиции
-  cargo_2.style.top = GlobalCargo2Pos + "px";
+  let cargo_blue = document.getElementById("cargo_blue"); // Инизиализируем грузики
+  let cargo_red = document.getElementById("cargo_red");
+  cargo_blue.style.top = GlobalCargobluePos + "px"; // Возвращаем на изначальные позиции
+  cargo_red.style.top = GlobalCargoredPos + "px";
+  weight_1.style.visibility = "hidden"; // ПРИ RESET ПРЯЧЕМ ИХ, ОТКЛЮЧАЕМ ФЛАГИ И СБРАСЫВАЕМ ДОБАВЛЕННУЮ МАССУ.
+  weight_2.style.visibility = "hidden";
+  weight_3.style.visibility = "hidden";
+  wht1_flag = 0;
+  wht2_flag = 0;
+  wht3_flag = 0;
+  added_mass = 0;
   timer.reset(); // Обнуляем таймер
   buttonStart.disabled = false; // Включаем кнопку "START"
+}
+
+function wht1_init() {  //ИНИЦИАЛИЗАЦИЯ ГРУЗИКОВ
+  let weight_1 = document.getElementById("weight_1");           // ПОЛУЧАЕМ ГРУЗИК
+  weight_1.style.left = document.getElementById("cargo_blue").offsetLeft + "px";  // ЛЕВАЯ ПОЗИЦИЯ (ТАКАЯ ЖЕ, КАК У СИНЕГО)
+  weight_1.style.top = (document.getElementById("cargo_blue").offsetTop - 20) + "px";  // TOP ПОЗИЦИЯ (КАК У СИНЕГО, НО МЕНЬШЕ НА 20)
+  weight_1.style.visibility = "visible"; // ПОКАЗЫВАЕМ ЕГО
+  added_mass = 5; // МАССА И ФЛАГ, ЧТО ОН ВКЛЮЧЕН
+  wht1_flag = 1;
+  
+}
+
+function wht2_init() {
+  let weight_2 = document.getElementById("weight_2");
+  weight_2.style.left = document.getElementById("cargo_blue").offsetLeft + "px";
+  weight_2.style.top = (document.getElementById("cargo_blue").offsetTop - 20) + "px";  
+  weight_2.style.visibility = "visible";
+  added_mass = 10;
+  wht2_flag = 0;
+}
+
+function wht3_init() {
+  let weight_3 = document.getElementById("weight_3");
+  weight_3.style.left = document.getElementById("cargo_blue").offsetLeft + "px";
+  weight_3.style.top = (document.getElementById("cargo_blue").offsetTop - 20) + "px";  
+  weight_3.style.visibility = "visible";
+  added_mass = 10;
+  wht3_flag = 0;
 }
