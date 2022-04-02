@@ -5,7 +5,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-image: url(/Project/img/1.png); /* Задаём фон для тела */
+  background-image: url(img/1.png); /* Задаём фон для тела */
 }
 
 /*У ВСЕГО ПОЗИЦИЯ АБСОЛЮТНАЯ НА СЛУЧАЙ ЕСЛИ НУЖНО ПОЛУЧИТЬ МЕСТОПОЛОЖЕНИЕ С ПОМОЩЬЮ OFFSET (см в script)*/
@@ -98,12 +98,17 @@ body {
 }
 #weight_2{
   background: rgb(208, 0, 245);
-  top:400px;
+
   visibility: hidden;
 }
 #weight_3{
   background: rgb(132, 0, 255);
-  top:500px;
+
+  visibility: hidden;
+}
+#weight_4{
+  background: rgb(242, 255, 0);
+
   visibility: hidden;
 }
 
@@ -128,6 +133,9 @@ body {
   background: rgb(0, 255, 21);
   border-radius: 5px;
 }
+
+
+
 
 
 .button {
@@ -179,6 +187,12 @@ body {
   
   background-color: chocolate;
   top:755px;
+  left: 1030px;
+}
+#button_weight_4{
+  
+  background-color: chocolate;
+  top:705px;
   left: 1030px;
 }
 
