@@ -90,15 +90,20 @@ var timer = new Stopwatch(elem, { delay: 10 }); // <-- ИНИЦИАЛИЗИРУ�
 const GlobalCargobluePos = document.getElementById("cargo_blue").offsetTop; // ПОЛУЧАЕМ ПЕРВОНАЧАЛЬНЫЕ ПОЗИЦИЯ ПРАВОГО И ЛЕВОГО ГРУЗИКОВ ОТНОСИТЕЛЬНО
 const GlobalCargoredPos = document.getElementById("cargo_red").offsetTop; // ВЕРХА ЭКРАНА С ПОМОЩЬЮ offsetTop
 
-const buttonStart = document.querySelector("button_start"); //ИНИЗИАЛИЗИРУЕМ КНОПКУ START
-const buttonReset = document.querySelector("button_reset"); //ИНИЦИАЛИЗИРУЕМ КНОПКУ RESER
+let button_start = document.getElementById("button_start");
+let button_reset = document.getElementById("button_reset");
+
 
 let added_mass = 0; // ИНИЦИАЛИЗИРУЕМ МАССУ, ДОБАВЛЕННУЮ ГРУЗИКАМИ
 let wht1_flag = 0; // ИНИЦИАЛИЗИРУЕМ ФЛАГИ, ОЗНАЧАЮЩИЕ, ЧТО ГРУЗИК X БЫЛ ВКЛЮЧЕН (потом мб понадобится)
 let wht2_flag = 0;
 let wht3_flag = 0;
+let wht4_flag = 0;
+let flag_sum = 0;
+const cargo_height = document.getElementById("cargo_blue").offsetHeight;
 
 function move() {
+  
   let weight_1 = document.getElementById("weight_1"); // ИНИЦИАЛИЗИРУЕМ ГРУЗИКИ
   let weight_2 = document.getElementById("weight_2");
   let weight_3 = document.getElementById("weight_3");
@@ -125,8 +130,6 @@ function move() {
   setInterval(animate, 10); // Каждые 10мс вызывается функция animate(), пока не прирвём с помощью clearInterval(animate). Значение 10 можно менять
   timer.start(); // Запускаем секундомер
 
-  buttonStart.disabled = true; // Отключаем кнопку START
-
   function animate() {
     pixelsToMove = a * timer.curr_time(); //равноуск. движ. t = 139 px/с^2 для m1 = 82.5, m2 =
     v0 = pixelsToMove;
@@ -135,7 +138,7 @@ function move() {
       //Если правый грузик достиг места остановки,
       clearInterval(animate); // то прерываем animate() [движение]  TODO: ПОФИКСИТЬ ВРЕЗАНИЕ В СТОЙКУ. СКОРЕЕ ВСЕГО ПРОИСХОДИТ, ПОТОМУ ЧТО ДВИГАЕТСЯ БОЛЬШЕ ЧЕМ НА 1 ПИКСЕЛЬ ЗА ИТЕРАЦИЮ
     } else {
-      if (currentCargoblue >= sensorPos) {
+      if (currentCargoblue >= sensorPos - cargo_height) {
         //Если правый грузик достиг линии сенсора фотодатчика
         timer.stop(sensorPos); // то останавливаем секундомер
       }
@@ -173,46 +176,84 @@ function reset() {
   wht3_flag = 0;
   wht4_flag = 0;
   added_mass = 0;
+  flag_sum = 0;
+
   timer.reset(); // Обнуляем таймер
-  buttonStart.disabled = false; // Включаем кнопку "START"
 }
 
 function wht1_init() {
   //ИНИЦИАЛИЗАЦИЯ ГРУЗИКОВ
-  let weight_1 = document.getElementById("weight_1"); // ПОЛУЧАЕМ ГРУЗИК
-  weight_1.style.left = document.getElementById("cargo_blue").offsetLeft + "px"; // ЛЕВАЯ ПОЗИЦИЯ (ТАКАЯ ЖЕ, КАК У СИНЕГО)
-  weight_1.style.top =
-    document.getElementById("cargo_blue").offsetTop - 20 + "px"; // TOP ПОЗИЦИЯ (КАК У СИНЕГО, НО МЕНЬШЕ НА 20)
-  weight_1.style.visibility = "visible"; // ПОКАЗЫВАЕМ ЕГО
-  added_mass = 1.4; // МАССА И ФЛАГ, ЧТО ОН ВКЛЮЧЕН
-  wht1_flag = 1;
+
+  if (flag_sum <= 1 && wht1_flag == 0) {
+    let weight_1 = document.getElementById("weight_1"); // ПОЛУЧАЕМ ГРУЗИК
+    weight_1.style.left =
+      document.getElementById("cargo_blue").offsetLeft + "px"; // ЛЕВАЯ ПОЗИЦИЯ (ТАКАЯ ЖЕ, КАК У СИНЕГО)
+    if (flag_sum == 1) {
+      weight_1.style.top =
+        document.getElementById("cargo_blue").offsetTop - 40 + "px"; // TOP ПОЗИЦИЯ (КАК У СИНЕГО, НО МЕНЬШЕ НА 20)
+    } else {
+      weight_1.style.top =
+        document.getElementById("cargo_blue").offsetTop - 20 + "px";
+    }
+    weight_1.style.visibility = "visible"; // ПОКАЗЫВАЕМ ЕГО
+    added_mass += 1.4; // МАССА И ФЛАГ, ЧТО ОН ВКЛЮЧЕН
+    wht1_flag = 1;
+    flag_sum += 1;
+  }
 }
 
 function wht2_init() {
-  let weight_2 = document.getElementById("weight_2");
-  weight_2.style.left = document.getElementById("cargo_blue").offsetLeft + "px";
-  weight_2.style.top =
-    document.getElementById("cargo_blue").offsetTop - 20 + "px";
-  weight_2.style.visibility = "visible";
-  added_mass = 3.8;
-  wht2_flag = 1;
+  if (flag_sum <= 1 && wht2_flag == 0) {
+    let weight_2 = document.getElementById("weight_2");
+    weight_2.style.left =
+      document.getElementById("cargo_blue").offsetLeft + "px";
+    if (flag_sum == 1) {
+      weight_2.style.top =
+        document.getElementById("cargo_blue").offsetTop - 40 + "px";
+    } else {
+      weight_2.style.top =
+        document.getElementById("cargo_blue").offsetTop - 20 + "px";
+    }
+    weight_2.style.visibility = "visible";
+    added_mass = 2.8;
+    wht2_flag = 1;
+    flag_sum += 1;
+  }
 }
 
 function wht3_init() {
-  let weight_3 = document.getElementById("weight_3");
-  weight_3.style.left = document.getElementById("cargo_blue").offsetLeft + "px";
-  weight_3.style.top =
-    document.getElementById("cargo_blue").offsetTop - 20 + "px";
-  weight_3.style.visibility = "visible";
-  added_mass = 2.1;
-  wht3_flag = 1;
+  if (flag_sum <= 1 && wht3_flag == 0) {
+    let weight_3 = document.getElementById("weight_3");
+    weight_3.style.left =
+      document.getElementById("cargo_blue").offsetLeft + "px";
+    if (flag_sum == 1) {
+      weight_3.style.top =
+        document.getElementById("cargo_blue").offsetTop - 40 + "px";
+    } else {
+      weight_3.style.top =
+        document.getElementById("cargo_blue").offsetTop - 20 + "px";
+    }
+    weight_3.style.visibility = "visible";
+    added_mass += 2.1;
+    wht3_flag = 1;
+    flag_sum += 1;
+  }
 }
 function wht4_init() {
-  let weight_3 = document.getElementById("weight_4");
-  weight_3.style.left = document.getElementById("cargo_blue").offsetLeft + "px";
-  weight_3.style.top =
-    document.getElementById("cargo_blue").offsetTop - 20 + "px";
-  weight_3.style.visibility = "visible";
-  added_mass = 4.3;
-  wht3_flag = 1;
+  if (flag_sum <= 1 && wht_4 == 0) {
+    let weight_4 = document.getElementById("weight_4");
+    weight_4.style.left =
+      document.getElementById("cargo_blue").offsetLeft + "px";
+    if (flag_sum == 1) {
+      weight_4.style.top =
+        document.getElementById("cargo_blue").offsetTop - 40 + "px";
+    } else {
+      weight_4.style.top =
+        document.getElementById("cargo_blue").offsetTop - 20 + "px";
+    }
+    weight_4.style.visibility = "visible";
+    added_mass = 4.3;
+    wht4_flag = 1;
+    flag_sum += 1;
+  }
 }
