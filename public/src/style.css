@@ -1,11 +1,12 @@
 html {
   height: 100%;
+  background-image: url(1.png);
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-image: url(/public/img/1.png); /* Задаём фон для тела */
+   /* Задаём фон для тела */
 }
 
 /*У ВСЕГО ПОЗИЦИЯ АБСОЛЮТНАЯ НА СЛУЧАЙ ЕСЛИ НУЖНО ПОЛУЧИТЬ МЕСТОПОЛОЖЕНИЕ С ПОМОЩЬЮ OFFSET (см в script)*/
@@ -117,7 +118,7 @@ body {
   position: absolute;
   width: 30px;
   height: 645px;
-  background-image: url(/public/img/ruler_50cm.png);
+  background-image: url(ruler_50cm.png);
   background-size: cover;
   top: 210px;
   left: 577px;
@@ -151,7 +152,8 @@ body {
   background-color: #ff0000; /* Green */
   border: none;
   color: rgb(0, 0, 0);
-  padding: 9px 45px;
+  padding: 9px 20px;
+  min-width:120px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -163,7 +165,8 @@ body {
 .button:hover:not(:disabled) {
   /* При наведении на кнопку */
   background-color: #000000;
-  color: white;
+  color: black;
+  filter:brightness(70%);
 }
 .button:disabled{
   opacity: 0.7;
@@ -188,27 +191,27 @@ body {
   
   background-color: lavender;
   top:855px;
-  left: 1030px;
+  left: 1080px;
 }
 
 #button_weight_2{
   
   background-color: lavender;
   top:805px;
-  left: 1030px;
+  left: 1080px;
 }
 
 #button_weight_3{
   
   background-color: lavender;
   top:755px;
-  left: 1030px;
+  left: 1080px;
 }
 #button_weight_4{
   
   background-color: lavender;
   top:705px;
-  left: 1030px;
+  left: 1080px;
 }
 
 
