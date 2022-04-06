@@ -6,7 +6,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-   /* Задаём фон для тела */
+  /* Задаём фон для тела */
 }
 
 /*У ВСЕГО ПОЗИЦИЯ АБСОЛЮТНАЯ НА СЛУЧАЙ ЕСЛИ НУЖНО ПОЛУЧИТЬ МЕСТОПОЛОЖЕНИЕ С ПОМОЩЬЮ OFFSET (см в script)*/
@@ -42,6 +42,33 @@ body {
   height: 210px;
   left: 495px;
 }
+#thread_top {
+  position: absolute;
+  width: 210px;
+  height: 210px;
+  border-radius: 50% 50% 1% 1%;
+  border-top: 5px solid #292c2c;
+  border-left: 5px solid #292c2c;
+  border-right: 5px solid #292c2c;
+  left: 490px;
+}
+#thread_left {
+  position: absolute;
+  width: 5px;
+  height: 600px;
+  left: 490px;
+  top: 200px;
+  background-color: #292c2c;
+}
+
+#thread_right {
+  position: absolute;
+  width: 5px;
+  height: 60px;
+  left: 705px;
+  top: 200px;
+  background-color: #292c2c;
+}
 
 #stand {
   /* Стойка (вертикальная) */
@@ -50,7 +77,7 @@ body {
   height: 720px;
   top: 143px;
   left: 577px;
-  background: rgb(45, 45, 53);
+  background-color: rgb(45, 45, 53);
 }
 
 #base {
@@ -73,18 +100,18 @@ body {
 }
 #cargo_blue {
   /* Правый грузик */
-  background: rgb(0, 0, 255);
-  left: 680px;
+  background: url(cargo_right.png);
+  left: 677px;
   top: 243px;
 }
 #cargo_red {
   /* Левый грузик */
-  background: rgb(255, 0, 0);
-  left: 458px;
+  background: url(cargo_left.png);
+  left: 462px;
   top: 787px;
 }
 
-.weight{
+.weight {
   position: absolute;
   width: 60px;
   height: 20px;
@@ -92,23 +119,23 @@ body {
   border-radius: 5px;
 }
 
-#weight_1{
-  background: rgb(0, 0, 0);
-  
-  visibility: hidden;
-}
-#weight_2{
-  background: rgb(208, 0, 245);
+#weight_1 {
+  background: url(deltam1.png);
 
   visibility: hidden;
 }
-#weight_3{
-  background: rgb(132, 0, 255);
+#weight_2 {
+  background: url(deltam2.png);
 
   visibility: hidden;
 }
-#weight_4{
-  background: rgb(242, 255, 0);
+#weight_3 {
+  background: url(deltam3.png);
+
+  visibility: hidden;
+}
+#weight_4 {
+  background: url(deltam4.png);
 
   visibility: hidden;
 }
@@ -135,16 +162,14 @@ body {
   border-radius: 5px;
 }
 
-#thread-right{
-  position:absolute;
-  height:50px;
-  width:3px;
-  left:706px;
-  top:100px;
+#thread-right {
+  position: absolute;
+  height: 50px;
+  width: 3px;
+  left: 706px;
+  top: 100px;
   background-color: rgb(255, 0, 238);
 }
-
-
 
 .button {
   /* Кнопка START */
@@ -153,7 +178,7 @@ body {
   border: none;
   color: rgb(0, 0, 0);
   padding: 9px 20px;
-  min-width:120px;
+  min-width: 120px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -166,57 +191,49 @@ body {
   /* При наведении на кнопку */
   background-color: #000000;
   color: black;
-  filter:brightness(70%);
+  filter: brightness(70%);
 }
-.button:disabled{
+.button:disabled {
   opacity: 0.7;
 }
 
-#button_start{
+#button_start {
   background-color: #fbff00;
   top: 855px;
 }
 
-#button_reset{
+#button_reset {
   background-color: #48ff00;
   top: 805px;
 }
-#dummy_button{
+#dummy_button {
   background-color: #444c4c;
   top: 805px;
   visibility: visible;
 }
 
-#button_weight_1{
-  
+#button_weight_1 {
   background-color: lavender;
-  top:855px;
+  top: 855px;
   left: 1080px;
 }
 
-#button_weight_2{
-  
+#button_weight_2 {
   background-color: lavender;
-  top:805px;
+  top: 805px;
   left: 1080px;
 }
 
-#button_weight_3{
-  
+#button_weight_3 {
   background-color: lavender;
-  top:755px;
+  top: 755px;
   left: 1080px;
 }
-#button_weight_4{
-  
+#button_weight_4 {
   background-color: lavender;
-  top:705px;
+  top: 705px;
   left: 1080px;
 }
-
-
-
-
 
 .stopwatch {
   /* Секундомер */
@@ -237,9 +254,6 @@ body {
 }
 
 .stopwatch a {
-  
   padding-right: 10px;
   text-decoration: none;
 }
-
-
