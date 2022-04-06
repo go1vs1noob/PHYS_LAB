@@ -1,5 +1,5 @@
 var Stopwatch = function (elem, options) {
-  /* СЕКУНДОМЕР. НЕ РАЗБИРАЛСЯ В РАБОТЕ, КАК Я ПОНЯЛ, ПРОСТО ЗАПРАШИВАЕТ ДАТУ И ЧЕРЕЗ ДЕЛЬТУ ОБНОВЛЯЕТ СЧЕТЧИК */
+  /* СЕКУНДОМЕР. ЗАПРАШИВАЕТ ДАТУ И ЧЕРЕЗ ДЕЛЬТУ ОБНОВЛЯЕТ СЧЕТЧИК */
   var timer = createTimer(),
 
     offset,
@@ -92,7 +92,7 @@ let button_start = document.getElementById("button_start");
 let button_reset = document.getElementById("button_reset");
 let button_weight_1 = document.getElementById("button_weight_1");
 let button_weight_2 = document.getElementById("button_weight_2");
-let button_weight_3 = document.getElementById("button_weight_3");
+let button_weight_3 = document.getElementById("button_weight_3"); // ИНИЦИАЛИЗАЦИЯ ОБЪЕКТОВ
 let button_weight_4 = document.getElementById("button_weight_4");
 let dummy_button = document.getElementById("dummy_button");
 
@@ -101,14 +101,14 @@ let dummy_button = document.getElementById("dummy_button");
 
 
 let added_mass = 0; // ИНИЦИАЛИЗИРУЕМ МАССУ, ДОБАВЛЕННУЮ ГРУЗИКАМИ
-let wht1_flag = 0; // ИНИЦИАЛИЗИРУЕМ ФЛАГИ, ОЗНАЧАЮЩИЕ, ЧТО ГРУЗИК X БЫЛ ВКЛЮЧЕН (потом мб понадобится)
+let wht1_flag = 0; // ИНИЦИАЛИЗИРУЕМ ФЛАГИ, ОЗНАЧАЮЩИЕ, ЧТО ГРУЗИК X БЫЛ ВКЛЮЧЕН 
 let wht2_flag = 0;
 let wht3_flag = 0;
 let wht4_flag = 0;
 let flag_sum = 0;
-const cargo_height = document.getElementById("cargo_blue").offsetHeight;
+const cargo_height = document.getElementById("cargo_blue").offsetHeight; // ВЫСОТА ГРУЗИКА
 
-button_start.addEventListener("click", (e) => {
+button_start.addEventListener("click", (e) => { 
   if (flag_sum !=0){
     button_reset.disabled = true;
     button_start.disabled = true;
@@ -117,7 +117,7 @@ button_start.addEventListener("click", (e) => {
   }
   
 });
-button_reset.addEventListener("click", (e) => {
+button_reset.addEventListener("click", (e) => {        // ДОБАВЛЯЕМ КНОПКИ В EventListener (обработка кнопок много раз)
     reset();
     turn_on_weight_buttons();
     button_start.disabled = false;
@@ -163,16 +163,15 @@ function move() {
   let acceleration =
     9.806 * 17 * ((81.1 + added_mass - 81.1) / (81.1 + 81.1 + added_mass)); // g = 9.8, 17px/cm, 81.1 = m;
   
-    let animateInterval = setInterval(animate, 10); // Каждые 10мс вызывается функция animate(), пока не прирвём с помощью clearInterval(animate). Значение 10 можно менять
+  let animateInterval = setInterval(animate, 10); // Каждые 10мс вызывается функция animate(), пока не прирвём с помощью clearInterval(animate). Значение 10 можно менять
   timer.start(); // Запускаем секундомер
     
   function animate() {
-    console.log(button_reset.disabled);
     pixelsToMove = acceleration * timer.curr_time(); //равноуск. движ. t = 139 px/с^2 для m1 = 82.5, m2 =
     if (currentCargoblue >= cargoToStop) {
       //Если правый грузик достиг места остановки,
       clearInterval(animateInterval); // то прерываем animate() [движение]  TODO: ПОФИКСИТЬ ВРЕЗАНИЕ В СТОЙКУ. СКОРЕЕ ВСЕГО ПРОИСХОДИТ, ПОТОМУ ЧТО ДВИГАЕТСЯ БОЛЬШЕ ЧЕМ НА 1 ПИКСЕЛЬ ЗА ИТЕРАЦИЮ
-      button_reset.disabled = false;
+      button_reset.disabled = false;  // КОГДА ГРУЗИК ОСТАНАВЛИВАЕТСЯ ПОЗВОЛЯЕМ ПОЛЬЗОВАТЕЛЮ СДЕЛАТЬ СБРОС
 
     } else {
       if (currentCargoblue >= sensorPos - cargo_height) {
@@ -206,11 +205,11 @@ function reset() {
   weight_4.style.visibility = "hidden";
   wht1_flag = 0;
   wht2_flag = 0;
-  wht3_flag = 0;
+  wht3_flag = 0; // ФЛАГИ, ЧТО ДОБАВЛЕН X ГРУЗИК
   wht4_flag = 0;
   added_mass = 0;
   flag_sum = 0;
-  timer.stop();
+  timer.stop();  // Останавливаем таймер
   timer.reset(); // Обнуляем таймер
 }
 
@@ -223,10 +222,10 @@ function wht1_init() {
       document.getElementById("cargo_blue").offsetLeft + "px"; // ЛЕВАЯ ПОЗИЦИЯ (ТАКАЯ ЖЕ, КАК У СИНЕГО)
     if (flag_sum == 1) {
       weight_1.style.top =
-        document.getElementById("cargo_blue").offsetTop - 40 + "px"; // TOP ПОЗИЦИЯ (КАК У СИНЕГО, НО МЕНЬШЕ НА 20)
+        document.getElementById("cargo_blue").offsetTop - 40 + "px"; // TOP ПОЗИЦИЯ (КАК У СИНЕГО, НО МЕНЬШЕ НА 40 ЕСЛИ 1 ГРУЗИК УЖЕ ДОБАВЛЕН)
     } else {
       weight_1.style.top =
-        document.getElementById("cargo_blue").offsetTop - 20 + "px";
+        document.getElementById("cargo_blue").offsetTop - 20 + "px"; // TOP ПОЗИЦИЯ (КАК У СИНЕГО, НО МЕНЬШЕ НА 40 ЕСЛИ 0 ГРУЗИКОВ УЖЕ ДОБАВЛЕН)
     }
     weight_1.style.visibility = "visible"; // ПОКАЗЫВАЕМ ЕГО
     added_mass += 1.4; // МАССА И ФЛАГ, ЧТО ОН ВКЛЮЧЕН
@@ -293,14 +292,14 @@ function wht4_init() {
 
 function turn_off_weight_buttons() {
   button_weight_1.disabled = true;
-  button_weight_2.disabled = true;
+  button_weight_2.disabled = true;      // ОТКЛЮЧЕНИЕ КНОПОК ГРУЗОВ
   button_weight_3.disabled = true;
   button_weight_4.disabled = true;
 }
 
 function turn_on_weight_buttons() {
   button_weight_1.disabled = false;
-  button_weight_2.disabled = false;
+  button_weight_2.disabled = false;    // ВКЛЮЧЕНИЕ КНОПОК ГРУЗОВ
   button_weight_3.disabled = false;
   button_weight_4.disabled = false;
 }
