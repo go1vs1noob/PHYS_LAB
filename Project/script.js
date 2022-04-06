@@ -1,9 +1,7 @@
 var Stopwatch = function (elem, options) {
   /* СЕКУНДОМЕР. НЕ РАЗБИРАЛСЯ В РАБОТЕ, КАК Я ПОНЯЛ, ПРОСТО ЗАПРАШИВАЕТ ДАТУ И ЧЕРЕЗ ДЕЛЬТУ ОБНОВЛЯЕТ СЧЕТЧИК */
   var timer = createTimer(),
-    startButton = createButton("start", start),
-    stopButton = createButton("stop", stop),
-    resetButton = createButton("reset", reset),
+
     offset,
     clock,
     interval;
@@ -14,9 +12,9 @@ var Stopwatch = function (elem, options) {
 
   // append elements
   elem.appendChild(timer);
-  elem.appendChild(startButton);
+ /* elem.appendChild(startButton);
   elem.appendChild(stopButton);
-  elem.appendChild(resetButton);
+  elem.appendChild(resetButton);*/
 
   // initialize
   reset();
@@ -26,7 +24,7 @@ var Stopwatch = function (elem, options) {
     return document.createElement("span");
   }
 
-  function createButton(action, handler) {
+  /*function createButton(action, handler) {
     var a = document.createElement("a");
     a.href = "#" + action;
     a.innerHTML = action;
@@ -35,7 +33,7 @@ var Stopwatch = function (elem, options) {
       event.preventDefault();
     });
     return a;
-  }
+  }*/
 
   function start() {
     if (!interval) {
@@ -83,7 +81,7 @@ var Stopwatch = function (elem, options) {
   this.curr_time = show;
 };
 
-//----------------------------------------------------------------------------------------------------------------------------//
+//-----------------------MAIN-----------------------------------------------------------------------------------------------------//
 
 var elem = document.getElementById("my-stopwatch"); // ПОЛУЧАЕМ СЕКУНДОМЕР С ПОМОЩЬЮ getElementById И ЕГО НАЗВАНИЯ В HTML
 var timer = new Stopwatch(elem, { delay: 10 }); // <-- ИНИЦИАЛИЗИРУЕМ. DELAY - ТО, КАК ЧАСТО ОБНОВЛЯЕТСЯ СЧЕТЧИК НА ЭКРАНЕ
@@ -92,6 +90,14 @@ const GlobalCargoredPos = document.getElementById("cargo_red").offsetTop; // В�
 
 let button_start = document.getElementById("button_start");
 let button_reset = document.getElementById("button_reset");
+let button_weight_1 = document.getElementById("button_weight_1");
+let button_weight_2 = document.getElementById("button_weight_2");
+let button_weight_3 = document.getElementById("button_weight_3");
+let button_weight_4 = document.getElementById("button_weight_4");
+let dummy_button = document.getElementById("dummy_button");
+
+
+
 
 
 let added_mass = 0; // ИНИЦИАЛИЗИРУЕМ МАССУ, ДОБАВЛЕННУЮ ГРУЗИКАМИ
@@ -102,12 +108,43 @@ let wht4_flag = 0;
 let flag_sum = 0;
 const cargo_height = document.getElementById("cargo_blue").offsetHeight;
 
-function move() {
+button_start.addEventListener("click", (e) => {
+  if (flag_sum !=0){
+    button_reset.disabled = true;
+    button_start.disabled = true;
+    turn_off_weight_buttons();
+    move();
+  }
   
+});
+button_reset.addEventListener("click", (e) => {
+    reset();
+    turn_on_weight_buttons();
+    button_start.disabled = false;
+});
+button_weight_1.addEventListener("click", (e) => {
+  wht1_init();
+});
+button_weight_2.addEventListener("click", (e) => {
+  wht2_init();
+});
+button_weight_3.addEventListener("click", (e) => {
+  wht3_init();
+});
+button_weight_4.addEventListener("click", (e) => {
+  wht4_init();
+});
+
+
+
+
+function move() {
+
   let weight_1 = document.getElementById("weight_1"); // ИНИЦИАЛИЗИРУЕМ ГРУЗИКИ
   let weight_2 = document.getElementById("weight_2");
   let weight_3 = document.getElementById("weight_3");
   let weight_4 = document.getElementById("weight_4");
+
   let currentWeight_1 = weight_1.offsetTop; // И ИХ ТЕКУЩИЕ ПОЗИЦИИ
   let currentWeight_2 = weight_2.offsetTop;
   let currentWeight_3 = weight_3.offsetTop;
@@ -116,41 +153,38 @@ function move() {
   let cargo_blue = document.getElementById("cargo_blue"); // ИНИЦИАЛИЗИРУЕМ ГРУЗИКИ С ПОМОЩЬЮ getElementById
   let cargo_red = document.getElementById("cargo_red");
   let sensor = document.getElementById("sensor-line"); // ИНИЦИАЛИЗИРУЕМ ЛИНИЮ ФОТОСЕНСОРА С ПОМОЩЬЮ getElementById
-
   let currentCargoblue = cargo_blue.offsetTop; // Считываем координаты правого грузика
   let currentCargored = cargo_red.offsetTop; // Считываем координаты левого грузика (чтобы начать движение от них)
 
   const cargoToStop = GlobalCargoredPos; // Координаты для остановки правого грузика (изначальные координаты левого)
-
   let pixelsToMove = 0; // На сколько пикселей двигать грузики при каждом вызове функции
   let sensorPos = sensor.offsetTop; // Позиция сенсора
-  let a =
+  
+  let acceleration =
     9.806 * 17 * ((81.1 + added_mass - 81.1) / (81.1 + 81.1 + added_mass)); // g = 9.8, 17px/cm, 81.1 = m;
-
-  setInterval(animate, 10); // Каждые 10мс вызывается функция animate(), пока не прирвём с помощью clearInterval(animate). Значение 10 можно менять
+  
+    let animateInterval = setInterval(animate, 10); // Каждые 10мс вызывается функция animate(), пока не прирвём с помощью clearInterval(animate). Значение 10 можно менять
   timer.start(); // Запускаем секундомер
-
+    
   function animate() {
-    pixelsToMove = a * timer.curr_time(); //равноуск. движ. t = 139 px/с^2 для m1 = 82.5, m2 =
-    v0 = pixelsToMove;
-
+    console.log(button_reset.disabled);
+    pixelsToMove = acceleration * timer.curr_time(); //равноуск. движ. t = 139 px/с^2 для m1 = 82.5, m2 =
     if (currentCargoblue >= cargoToStop) {
       //Если правый грузик достиг места остановки,
-      clearInterval(animate); // то прерываем animate() [движение]  TODO: ПОФИКСИТЬ ВРЕЗАНИЕ В СТОЙКУ. СКОРЕЕ ВСЕГО ПРОИСХОДИТ, ПОТОМУ ЧТО ДВИГАЕТСЯ БОЛЬШЕ ЧЕМ НА 1 ПИКСЕЛЬ ЗА ИТЕРАЦИЮ
+      clearInterval(animateInterval); // то прерываем animate() [движение]  TODO: ПОФИКСИТЬ ВРЕЗАНИЕ В СТОЙКУ. СКОРЕЕ ВСЕГО ПРОИСХОДИТ, ПОТОМУ ЧТО ДВИГАЕТСЯ БОЛЬШЕ ЧЕМ НА 1 ПИКСЕЛЬ ЗА ИТЕРАЦИЮ
+      button_reset.disabled = false;
+
     } else {
       if (currentCargoblue >= sensorPos - cargo_height) {
         //Если правый грузик достиг линии сенсора фотодатчика
         timer.stop(sensorPos); // то останавливаем секундомер
       }
-
       currentCargored -= pixelsToMove; // В ином случае двигаем правый грузик вниз, а левый вверх на {pixelsToMove} пикселей (значение изменяемое)
       currentCargoblue += pixelsToMove;
-
       currentWeight_1 += pixelsToMove;
       currentWeight_2 += pixelsToMove; // ВМЕСТЕ С НИМИ ДВИГАЕМ И ДОБАВЛЕННЫЕ ГРУЗИКИ
       currentWeight_3 += pixelsToMove;
       currentWeight_4 += pixelsToMove;
-
       cargo_red.style.top = currentCargored + "px"; // Переприсваиваем новое положение в css с помощью style.top
       cargo_blue.style.top = currentCargoblue + "px";
       weight_1.style.top = currentWeight_1 + "px"; // ОБНОВЛЯЕМ ИХ ПОЗИЦИИ В CSS
@@ -162,9 +196,8 @@ function move() {
 }
 
 function reset() {
+
   // Возвращаем таймер и грузики в изначальное положение
-  let cargo_blue = document.getElementById("cargo_blue"); // Инизиализируем грузики
-  let cargo_red = document.getElementById("cargo_red");
   cargo_blue.style.top = GlobalCargobluePos + "px"; // Возвращаем на изначальные позиции
   cargo_red.style.top = GlobalCargoredPos + "px";
   weight_1.style.visibility = "hidden"; // ПРИ RESET ПРЯЧЕМ ИХ, ОТКЛЮЧАЕМ ФЛАГИ И СБРАСЫВАЕМ ДОБАВЛЕННУЮ МАССУ.
@@ -177,7 +210,7 @@ function reset() {
   wht4_flag = 0;
   added_mass = 0;
   flag_sum = 0;
-
+  timer.stop();
   timer.reset(); // Обнуляем таймер
 }
 
@@ -215,7 +248,7 @@ function wht2_init() {
         document.getElementById("cargo_blue").offsetTop - 20 + "px";
     }
     weight_2.style.visibility = "visible";
-    added_mass = 2.8;
+    added_mass += 2.8;
     wht2_flag = 1;
     flag_sum += 1;
   }
@@ -240,7 +273,7 @@ function wht3_init() {
   }
 }
 function wht4_init() {
-  if (flag_sum <= 1 && wht_4 == 0) {
+  if (flag_sum <= 1 && wht4_flag == 0) {
     let weight_4 = document.getElementById("weight_4");
     weight_4.style.left =
       document.getElementById("cargo_blue").offsetLeft + "px";
@@ -252,8 +285,22 @@ function wht4_init() {
         document.getElementById("cargo_blue").offsetTop - 20 + "px";
     }
     weight_4.style.visibility = "visible";
-    added_mass = 4.3;
+    added_mass += 4.3;
     wht4_flag = 1;
     flag_sum += 1;
   }
+}
+
+function turn_off_weight_buttons() {
+  button_weight_1.disabled = true;
+  button_weight_2.disabled = true;
+  button_weight_3.disabled = true;
+  button_weight_4.disabled = true;
+}
+
+function turn_on_weight_buttons() {
+  button_weight_1.disabled = false;
+  button_weight_2.disabled = false;
+  button_weight_3.disabled = false;
+  button_weight_4.disabled = false;
 }
