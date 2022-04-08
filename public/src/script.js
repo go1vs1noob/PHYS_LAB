@@ -154,8 +154,7 @@ function move() {
   let pixelsToMove = 0; // На сколько пикселей двигать грузики при каждом вызове функции
   let sensorPos = sensor.offsetTop; // Позиция сенсора
 
-  let acceleration =
-    9.806 * 17 * ((81.1 + added_mass - 81.1) / (81.1 + 81.1 + added_mass)); // g = 9.8, 17px/cm, 81.1 = m;
+  let acceleration = getRandomNum(0.95,1.05) * 9.806 * 17 * (added_mass / (81.1 + 81.1 + added_mass)); // g = 9.8, 17px/cm, 81.1 = m;
 
   let animateInterval = setInterval(animate, 10); // Каждые 10мс вызывается функция animate(), пока не прирвём с помощью clearInterval(animate). Значение 10 можно менять
   timer.start(); // Запускаем секундомер
@@ -307,4 +306,9 @@ function turn_on_weight_buttons() {
   button_weight_2.disabled = false; // ВКЛЮЧЕНИЕ КНОПОК ГРУЗОВ
   button_weight_3.disabled = false;
   button_weight_4.disabled = false;
+}
+
+
+function getRandomNum(min, max) {
+  return Math.random() * (max - min) + min;
 }
