@@ -45,6 +45,7 @@ var Stopwatch = function (elem, options) {
     if (interval) {
       clearInterval(interval);
       interval = null;
+      timer.innerHTML = clock / 1000 + " сек.";
     }
   }
 
@@ -56,6 +57,9 @@ var Stopwatch = function (elem, options) {
   function update() {
     clock += delta();
     render();
+  }
+  function update_no_render() {
+    clock += delta();
   }
 
   function render() {
@@ -78,6 +82,7 @@ var Stopwatch = function (elem, options) {
   this.stop = stop;
   this.reset = reset;
   this.curr_time = show;
+  this.update = update_no_render;
 };
 
 //-----------------------MAIN-----------------------------------------------------------------------------------------------------//
@@ -95,6 +100,7 @@ let button_weight_3 = document.getElementById("button_weight_3"); // ИНИЦИ�
 let button_weight_4 = document.getElementById("button_weight_4");
 let thread_left = document.getElementById("thread_left");
 let thread_right = document.getElementById("thread_right");
+let wheel = document.getElementById("wheel");
 
 let added_mass = 0; // ИНИЦИАЛИЗИРУЕМ МАССУ, ДОБАВЛЕННУЮ ГРУЗИКАМИ
 let wht1_flag = 0; // ИНИЦИАЛИЗИРУЕМ ФЛАГИ, ОЗНАЧАЮЩИЕ, ЧТО ГРУЗИК X БЫЛ ВКЛЮЧЕН
@@ -102,7 +108,52 @@ let wht2_flag = 0;
 let wht3_flag = 0;
 let wht4_flag = 0;
 let flag_sum = 0;
+let pixelsToMoveAfterTimerStop = 0;
 const cargo_height = document.getElementById("cargo_blue").offsetHeight; // ВЫСОТА ГРУЗИКА
+
+//DRAGGABLE RULER
+dragElement(document.getElementById("draggable_ruler"));
+
+function dragElement(elmnt) {
+  var pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
+  /* otherwise, move the DIV from anywhere inside the DIV:*/
+  elmnt.onmousedown = dragMouseDown;
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = elmnt.offsetTop - pos2 + "px";
+    elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+  }
+
+  function closeDragElement() {
+    /* stop moving when mouse button is released:*/
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
+//DRAGGABLE RULER
 
 button_start.addEventListener("click", (e) => {
   if (flag_sum != 0) {
@@ -131,6 +182,12 @@ button_weight_4.addEventListener("click", (e) => {
   wht4_init();
 });
 
+const wheel_r = 0.063;
+const M_tr = 0.00001;
+const cargo_mass = 0.0811; //всё в кг
+const I = 0.0005;
+const g = 9.806;
+
 function move() {
   let weight_1 = document.getElementById("weight_1"); // ИНИЦИАЛИЗИРУЕМ ГРУЗИКИ
   let weight_2 = document.getElementById("weight_2");
@@ -154,13 +211,16 @@ function move() {
   let pixelsToMove = 0; // На сколько пикселей двигать грузики при каждом вызове функции
   let sensorPos = sensor.offsetTop; // Позиция сенсора
 
-  let acceleration = getRandomNum(0.95,1.05) * 9.806 * 17 * (added_mass / (81.1 + 81.1 + added_mass)); // g = 9.8, 17px/cm, 81.1 = m;
+  let acceleration =
+    (17 * (added_mass * g * (wheel_r * wheel_r) - M_tr * wheel_r)) /
+    (wheel_r * wheel_r * (2 * cargo_mass + added_mass + I / wheel_r)); // g = 9.8, 17px/cm, 81.1 = m;
 
   let animateInterval = setInterval(animate, 10); // Каждые 10мс вызывается функция animate(), пока не прирвём с помощью clearInterval(animate). Значение 10 можно менять
   timer.start(); // Запускаем секундомер
 
   function animate() {
     pixelsToMove = acceleration * timer.curr_time(); //равноуск. движ. t = 139 px/с^2 для m1 = 82.5, m2 =
+
     if (currentCargoblue >= cargoToStop) {
       //Если правый грузик достиг места остановки,
       clearInterval(animateInterval); // то прерываем animate() [движение]  TODO: ПОФИКСИТЬ ВРЕЗАНИЕ В СТОЙКУ. СКОРЕЕ ВСЕГО ПРОИСХОДИТ, ПОТОМУ ЧТО ДВИГАЕТСЯ БОЛЬШЕ ЧЕМ НА 1 ПИКСЕЛЬ ЗА ИТЕРАЦИЮ
@@ -170,6 +230,7 @@ function move() {
         //Если правый грузик достиг линии сенсора фотодатчика
         timer.stop(sensorPos); // то останавливаем секундомер
       }
+
       currentCargored -= pixelsToMove; // В ином случае двигаем правый грузик вниз, а левый вверх на {pixelsToMove} пикселей (значение изменяемое)
       currentCargoblue += pixelsToMove;
 
@@ -181,7 +242,10 @@ function move() {
       currentThreadLeft -= pixelsToMove;
       currentThreadRight += pixelsToMove;
 
-      thread_right.style.height = currentThreadRight + "px";
+      timer.update(); // после преодоления фотосенсора, таймер на экране остановится. Но "внутри" мы его можем обновлять с помощью timer.update()
+      wheel.style.transform = "rotate(" + pixelsToMove * 17 + "deg)"; // двигаем колесо с помощью transform
+
+      thread_right.style.height = currentThreadRight + "px"; //нить "правая" и "левая"
       thread_left.style.height = currentThreadLeft + "px";
       cargo_red.style.top = currentCargored + "px"; // Переприсваиваем новое положение в css с помощью style.top
       cargo_blue.style.top = currentCargoblue + "px";
@@ -209,6 +273,8 @@ function reset() {
   wht4_flag = 0;
   added_mass = 0;
   flag_sum = 0;
+  pixelsToMoveAfterTimerStop = 0;
+  wheel.style.transform = "rotate(" + 0 + "deg)"; //ресетим колесо
   timer.stop(); // Останавливаем таймер
   timer.reset(); // Обнуляем таймер
 }
@@ -229,7 +295,7 @@ function wht1_init() {
         document.getElementById("cargo_blue").offsetTop - 20 + "px"; // TOP ПОЗИЦИЯ (КАК У СИНЕГО, НО МЕНЬШЕ НА 40 ЕСЛИ 0 ГРУЗИКОВ УЖЕ ДОБАВЛЕН)
     }
     weight_1.style.visibility = "visible"; // ПОКАЗЫВАЕМ ЕГО
-    added_mass += 1.4; // МАССА И ФЛАГ, ЧТО ОН ВКЛЮЧЕН
+    added_mass += 0.0014; // МАССА И ФЛАГ, ЧТО ОН ВКЛЮЧЕН
     wht1_flag = 1;
     flag_sum += 1;
   }
@@ -249,7 +315,7 @@ function wht2_init() {
         document.getElementById("cargo_blue").offsetTop - 20 + "px";
     }
     weight_2.style.visibility = "visible";
-    added_mass += 2.8;
+    added_mass += 0.0028;
     wht2_flag = 1;
     flag_sum += 1;
   }
@@ -269,7 +335,7 @@ function wht3_init() {
         document.getElementById("cargo_blue").offsetTop - 20 + "px";
     }
     weight_3.style.visibility = "visible";
-    added_mass += 2.1;
+    added_mass += 0.0021;
     wht3_flag = 1;
     flag_sum += 1;
   }
@@ -288,7 +354,7 @@ function wht4_init() {
         document.getElementById("cargo_blue").offsetTop - 20 + "px";
     }
     weight_4.style.visibility = "visible";
-    added_mass += 4.3;
+    added_mass += 0.0043;
     wht4_flag = 1;
     flag_sum += 1;
   }
@@ -307,7 +373,6 @@ function turn_on_weight_buttons() {
   button_weight_3.disabled = false;
   button_weight_4.disabled = false;
 }
-
 
 function getRandomNum(min, max) {
   return Math.random() * (max - min) + min;
