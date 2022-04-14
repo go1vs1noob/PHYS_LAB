@@ -1,3 +1,6 @@
+
+
+
 var Stopwatch = function (elem, options) {
   /* СЕКУНДОМЕР. ЗАПРАШИВАЕТ ДАТУ И ЧЕРЕЗ ДЕЛЬТУ ОБНОВЛЯЕТ СЧЕТЧИК */
   var timer = createTimer(),
@@ -213,8 +216,8 @@ function move() {
 
   let acceleration =
     (17 * (added_mass * g * (wheel_r * wheel_r) - M_tr * wheel_r)) /
-    (wheel_r * wheel_r * (2 * cargo_mass + added_mass + I / wheel_r)); // g = 9.8, 17px/cm, 81.1 = m;
-
+    (wheel_r * wheel_r * (2 * cargo_mass + added_mass + I /  (wheel_r*wheel_r))); // g = 9.8, 17px/cm, 81.1 = m;
+  
   let animateInterval = setInterval(animate, 10); // Каждые 10мс вызывается функция animate(), пока не прирвём с помощью clearInterval(animate). Значение 10 можно менять
   timer.start(); // Запускаем секундомер
 
