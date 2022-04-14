@@ -1,6 +1,6 @@
 html {
   height: 100%;
-  background-image: url(bg_img\(1\).jpg);
+  background-image: url(background.jpg);
   background-repeat:no-repeat;
 
 }
@@ -47,7 +47,7 @@ body {
 #wheel {
   /* Шестеренка */
   position: absolute;
-  background-image: url(circle_fully_fixed.png);
+  background-image: url(circle.png);
   top:4px;
   background-size:cover;
   width: 210px;
@@ -103,7 +103,7 @@ body {
   height: 720px;
   top: 143px;
   left: 577px;
-  background-image: url(concrete_stand_enhanced.png);
+  background-image: url(vertical_stand.png);
 }
 
 #base {
@@ -114,7 +114,7 @@ body {
   bottom: 0;
   left: 300px;
   border-radius: 10px;
-  background-image: url(concrete_vertical_enhanced.png);
+  background-image: url(horizontal_stand.png);
 }
 
 .cargo {
@@ -126,14 +126,14 @@ body {
 }
 #cargo_blue {
   /* Правый грузик */
-  background: url(zink_crate.png);
+  background: url(cargo.png);
   left: 677px;
   top: 243px;
   
 }
 #cargo_red {
   /* Левый грузик */
-  background: url(zink_crate.png);
+  background: url(cargo.png);
   left: 462px;
   top: 787px;
 }
@@ -149,7 +149,6 @@ body {
 
 #weight_1 {
   background: url(delta_m1.png);
-
   visibility: hidden;
 }
 #weight_2 {
