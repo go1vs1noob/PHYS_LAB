@@ -164,8 +164,6 @@ button_start.addEventListener("click", (e) => {
     button_start.disabled = true;
     turn_off_weight_buttons();
     move();
-  }else{
-    alert("добавте минимум один из перегрузов");
   }
 });
 button_reset.addEventListener("click", (e) => {

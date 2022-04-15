@@ -338,6 +338,7 @@ body {
   line-height:165%;
   font-size:x-large;
   border-radius: 4px;
+
 }
 
 
@@ -354,25 +355,36 @@ body {
   border-radius: 0%;
   left: 365px;
 }
-#instruction{
+.instruction{
   position:absolute;
-  font-size: 25px;
-  margin: 10px;
-  text-align: center;
-  font-family: sans-serif;
-  color: black ;
-  margin-top: 35px;
+  font-size: 65px;
+  font-family:"Open Sans Condensed";
+  left:5px;
+  top:700px;
+  text-decoration: none;
+  color: #eee;
+  
+  text-shadow: 1px 0 0 rgb(0, 0, 0), -1px 0 0 rgb(0, 0, 0), 0 1px 0 rgb(0, 0, 0), 0 -1px 0 rgb(0, 0, 0), 1px 1px rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0);
+  
+  
 }
+.instruction:hover{
+  color:rgb(0, 153, 255);
+  transition: all 500ms ease;
+  text-shadow: none;
+}
+
 .popup{
   position: fixed;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.6);
   top: 0;
   left: 0;
   opacity: 0;
   visibility: hidden;
 }
+
 .popup:target{
   opacity: 1;
   visibility: visible;
@@ -390,10 +402,12 @@ body {
   padding: 30px 10px;
 }
 .popup_content{
-  background-color: #eeeeee;
+  background-color: rgb(238, 238, 238,1);
+  border: 1px solid rgb(0, 0, 0);
   color: black;
   max-width: 800px;
-  padding: 30px;
+  border-radius: 5px;
+  padding: 20px;
   position: relative;
   transition: all 0.8s ease 0s;
   opacity: 0;
@@ -401,21 +415,28 @@ body {
 }
 .popup_close{
   position: absolute;
-  right: 10px;
+  right: 20px;
   top: 10px;
-  font-size: 20px;
+  font-size: 35px;
   color: black ;
+  font-family: sans-serif;
   text-decoration: none;
   overflow-y:auto ;
   overflow-x: hidden;
-  transition: all 0.8s ease 0s;
+  transition: all 0.5s ease 0s;
+}
+.popup_close:hover {
+  color: rgb(251, 4, 4) ;
 }
 .popup_text{
+  text-align: center;
   font-family: sans-serif;
   font-size: 25px;
+  
 }
 .popup_title{
-  font-size: 35px;
-  margin: 0px 0px 1em 0px;
+  text-align: center;
+  font-size: 40px;
   font-family: sans-serif;
 }
+
