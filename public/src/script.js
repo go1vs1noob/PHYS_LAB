@@ -95,6 +95,7 @@ var timer = new Stopwatch(elem, { delay: 10 }); // <-- ИНИЦИАЛИЗИРУ�
 const GlobalCargobluePos = document.getElementById("cargo_blue").offsetTop; // ПОЛУЧАЕМ ПЕРВОНАЧАЛЬНЫЕ ПОЗИЦИЯ ПРАВОГО И ЛЕВОГО ГРУЗИКОВ ОТНОСИТЕЛЬНО
 const GlobalCargoredPos = document.getElementById("cargo_red").offsetTop; // ВЕРХА ЭКРАНА С ПОМОЩЬЮ offsetTop
 
+
 let button_start = document.getElementById("button_start");
 let button_reset = document.getElementById("button_reset");
 let button_weight_1 = document.getElementById("button_weight_1");
@@ -104,6 +105,7 @@ let button_weight_4 = document.getElementById("button_weight_4");
 let thread_left = document.getElementById("thread_left");
 let thread_right = document.getElementById("thread_right");
 let wheel = document.getElementById("wheel");
+
 
 let added_mass = 0; // ИНИЦИАЛИЗИРУЕМ МАССУ, ДОБАВЛЕННУЮ ГРУЗИКАМИ
 let wht1_flag = 0; // ИНИЦИАЛИЗИРУЕМ ФЛАГИ, ОЗНАЧАЮЩИЕ, ЧТО ГРУЗИК X БЫЛ ВКЛЮЧЕН
