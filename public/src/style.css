@@ -362,7 +362,7 @@ body {
   left:5px;
   top:700px;
   text-decoration: none;
-  color: #eee;
+  color: lavender;
   
   text-shadow: 1px 0 0 rgb(0, 0, 0), -1px 0 0 rgb(0, 0, 0), 0 1px 0 rgb(0, 0, 0), 0 -1px 0 rgb(0, 0, 0), 1px 1px rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0);
   
@@ -402,8 +402,8 @@ body {
   padding: 30px 10px;
 }
 .popup_content{
-  background-color: rgb(238, 238, 238,1);
-  border: 1px solid rgb(0, 0, 0);
+  background-color: rgb(230, 230, 250,0.95);
+  border: 3px solid rgb(0, 0, 0);
   color: black;
   max-width: 800px;
   border-radius: 5px;
@@ -424,6 +424,7 @@ body {
   overflow-y:auto ;
   overflow-x: hidden;
   transition: all 0.5s ease 0s;
+  
 }
 .popup_close:hover {
   color: rgb(251, 4, 4) ;
