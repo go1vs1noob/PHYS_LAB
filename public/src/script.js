@@ -216,16 +216,16 @@ function move() {
   let pixelsToMove = 0; // На сколько пикселей двигать грузики при каждом вызове функции
   let sensorPos = sensor.offsetTop; // Позиция сенсора
 
-  let acceleration =
-    (17 * (added_mass * g * (wheel_r * wheel_r) - M_tr * wheel_r)) /
+  let acceleration =getRandomNum(0.95,1.05)*(17 * (added_mass * g * (wheel_r * wheel_r) - M_tr * wheel_r)) /
     (wheel_r * wheel_r * (2 * cargo_mass + added_mass + I /  (wheel_r*wheel_r))); // g = 9.8, 17px/cm, 81.1 = m;
   
   let animateInterval = setInterval(animate, 10); // Каждые 10мс вызывается функция animate(), пока не прирвём с помощью clearInterval(animate). Значение 10 можно менять
   timer.start(); // Запускаем секундомер
-
+  console.log(acceleration/17);
   function animate() {
-    pixelsToMove = acceleration * timer.curr_time(); //равноуск. движ. t = 139 px/с^2 для m1 = 82.5, m2 =
 
+    pixelsToMove = acceleration * timer.curr_time(); //равноуск. движ. t = 139 px/с^2 для m1 = 82.5, m2 =
+    
     if (currentCargoblue >= cargoToStop) {
       //Если правый грузик достиг места остановки,
       clearInterval(animateInterval); // то прерываем animate() [движение]  TODO: ПОФИКСИТЬ ВРЕЗАНИЕ В СТОЙКУ. СКОРЕЕ ВСЕГО ПРОИСХОДИТ, ПОТОМУ ЧТО ДВИГАЕТСЯ БОЛЬШЕ ЧЕМ НА 1 ПИКСЕЛЬ ЗА ИТЕРАЦИЮ

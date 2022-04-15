@@ -441,3 +441,13 @@ body {
   font-family: sans-serif;
 }
 
+.etu_logo{
+  position: absolute;
+  left:10px;
+  top:10px;
+  height:80px;
+  width:80px;
+  border-radius: 50%;
+  background-image: url(logo-sin-krug.png);
+  background-size: cover;
+}
