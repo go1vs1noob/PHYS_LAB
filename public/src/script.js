@@ -1,5 +1,3 @@
-
-
 const wheel_r = 0.063;
 const M_tr = 0.00001;
 const cargo_mass = 0.0811; //всё в кг
