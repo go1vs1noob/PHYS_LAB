@@ -1,5 +1,11 @@
 
 
+const wheel_r = 0.063;
+const M_tr = 0.00001;
+const cargo_mass = 0.0811; //всё в кг
+const I = 0.0005;
+const g = 9.806;
+
 
 var Stopwatch = function (elem, options) {
   /* СЕКУНДОМЕР. ЗАПРАШИВАЕТ ДАТУ И ЧЕРЕЗ ДЕЛЬТУ ОБНОВЛЯЕТ СЧЕТЧИК */
@@ -187,11 +193,7 @@ button_weight_4.addEventListener("click", (e) => {
   wht4_init();
 });
 
-const wheel_r = 0.063;
-const M_tr = 0.00001;
-const cargo_mass = 0.0811; //всё в кг
-const I = 0.0005;
-const g = 9.806;
+
 
 function move() {
   let weight_1 = document.getElementById("weight_1"); // ИНИЦИАЛИЗИРУЕМ ГРУЗИКИ
