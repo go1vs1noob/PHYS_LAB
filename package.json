@@ -1,0 +1,22 @@
+{
+  "name": "phys_lab",
+  "version": "1.0.0",
+  "description": "⠀\r ![1(2)](https://user-images.githubusercontent.com/90688133/160153903-0b3ac9ac-d6cf-488a-bec2-fde45acccf42.gif)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/go1vs1noob/PHYS_LAB.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/go1vs1noob/PHYS_LAB/issues"
+  },
+  "homepage": "https://github.com/go1vs1noob/PHYS_LAB#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
