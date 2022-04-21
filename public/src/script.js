@@ -248,7 +248,7 @@ function move() {
       currentThreadRight += pixelsToMove;
 
       timer.update(); // после преодоления фотосенсора, таймер на экране остановится. Но "внутри" мы его можем обновлять с помощью timer.update()
-      wheel.style.transform = "rotate(" + pixelsToMove * 17 + "deg)"; // двигаем колесо с помощью transform
+      wheel.style.transform = "rotate(" + pixelsToMove * 6 * 17 + "deg)"; // двигаем колесо с помощью transform
 
       thread_right.style.height = currentThreadRight + "px"; //нить "правая" и "левая"
       thread_left.style.height = currentThreadLeft + "px";
