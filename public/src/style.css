@@ -1,8 +1,7 @@
 html {
   height: 100%;
   background-image: url(background.jpg);
-  background-repeat:no-repeat;
-
+  background-repeat: no-repeat;
 }
 
 body {
@@ -23,14 +22,14 @@ body {
   top: 669px;
   border-radius: 5px;
   background-image: url(photosensor.png);
-  opacity:60%;
+  opacity: 60%;
 }
-#dot{
+#dot {
   width: 2px;
-  height:2px;
-  position:absolute;
-  left:599px;
-  top:106px;
+  height: 2px;
+  position: absolute;
+  left: 599px;
+  top: 106px;
   background-color: black;
 }
 #img {
@@ -48,13 +47,29 @@ body {
   /* Шестеренка */
   position: absolute;
   background-image: url(circle.png);
-  top:4px;
-  background-size:cover;
+  top: 4px;
+  background-size: cover;
   width: 210px;
   height: 210px;
   left: 495px;
 }
-#wheel_ruler{
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(260deg);
+  }
+}
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(260deg);
+  }
+}
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(260deg);
+    transform: rotate(260deg);
+  }
+}
+#wheel_ruler {
   position: absolute;
   width: 122px;
   height: 30px;
@@ -63,10 +78,7 @@ body {
   top: 107px;
   border-radius: 5%;
   left: 583px;
-
-
 }
-
 
 #thread_top {
   position: absolute;
@@ -129,7 +141,6 @@ body {
   background: url(cargo.png);
   left: 677px;
   top: 243px;
-  
 }
 #cargo_red {
   /* Левый грузик */
@@ -139,7 +150,6 @@ body {
 }
 
 .weight {
-  
   position: absolute;
   width: 60px;
   height: 20px;
@@ -169,7 +179,7 @@ body {
 
 #ruler {
   /* Линейка */
-  
+
   position: absolute;
   width: 30px;
   height: 645px;
@@ -228,16 +238,15 @@ body {
 #button_start {
   border: 1px solid rgb(0, 0, 0);
   margin-left: 5px;
-  background-color: rgb(243, 255, 12,0.7);
+  background-color: rgb(243, 255, 12, 0.7);
   background-size: cover;
   top: 850px;
   font-family: sans-serif;
 }
 
 #button_reset {
-
   margin-left: 5px;
-  background-color: rgb(64, 204, 8, 0.7);;
+  background-color: rgb(64, 204, 8, 0.7);
   border: 1px solid rgb(0, 0, 0);
   top: 800px;
   font-family: sans-serif;
@@ -257,7 +266,6 @@ body {
 }
 
 #button_weight_2 {
-
   border: 1px solid rgb(0, 0, 0);
   background-color: lavender;
   top: 800px;
@@ -266,7 +274,6 @@ body {
 }
 
 #button_weight_3 {
-
   border: 1px solid rgb(0, 0, 0);
   background-color: lavender;
   top: 750px;
@@ -274,7 +281,6 @@ body {
   font-family: sans-serif;
 }
 #button_weight_4 {
-
   border: 1px solid rgb(0, 0, 0);
   background-color: lavender;
   top: 700px;
@@ -284,24 +290,22 @@ body {
 
 .stopwatch {
   /* Секундомер */
-  
+
   font-family: sans-serif;
   width: 190px;
   position: absolute;
   display: inline-block;
   margin-top: 5px;
   margin-left: 5px;
-  background-color:rgba(255, 255, 255, 0.65);
+  background-color: rgba(255, 255, 255, 0.65);
   border: 1px solid #eee;
   padding: 6px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   font-size: 40px;
-  
 }
 
 .stopwatch span {
-  
   font-weight: bold;
   display: block;
   font-family: sans-serif;
@@ -311,40 +315,34 @@ body {
   font-family: sans-serif;
 }
 
-
-
-#my-stopwatch{
-  position:absolute
+#my-stopwatch {
+  position: absolute;
 }
 
-#wheel-stopwatch{
-  position:absolute
+#wheel-stopwatch {
+  position: absolute;
 }
 
-
-#info_stand{
+#info_stand {
   border: 1px solid #eee;
-  position:absolute;
-  height:200px;
+  position: absolute;
+  height: 200px;
   width: 300px;
-  left:850px;
-  top:45px;
+  left: 850px;
+  top: 45px;
   background-image: url(bg_info.png);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   opacity: 80%;
   vertical-align: center;
   text-align: center;
   font-family: sans-serif;
-  line-height:165%;
-  font-size:x-large;
+  line-height: 165%;
+  font-size: x-large;
   border-radius: 4px;
-
 }
 
-
-#draggable_ruler{
-  
-  cursor:move;
+#draggable_ruler {
+  cursor: move;
   position: absolute;
   width: 275px;
   height: 30px;
@@ -355,54 +353,54 @@ body {
   border-radius: 0%;
   left: 365px;
 }
-.instruction{
-  position:absolute;
+.instruction {
+  position: absolute;
   font-size: 65px;
-  font-family:"Open Sans Condensed";
-  left:5px;
-  top:700px;
+  font-family: "Open Sans Condensed";
+  left: 5px;
+  top: 700px;
   text-decoration: none;
   color: lavender;
-  
-  text-shadow: 1px 0 0 rgb(0, 0, 0), -1px 0 0 rgb(0, 0, 0), 0 1px 0 rgb(0, 0, 0), 0 -1px 0 rgb(0, 0, 0), 1px 1px rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0);
-  
-  
+
+  text-shadow: 1px 0 0 rgb(0, 0, 0), -1px 0 0 rgb(0, 0, 0), 0 1px 0 rgb(0, 0, 0),
+    0 -1px 0 rgb(0, 0, 0), 1px 1px rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0),
+    1px -1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0);
 }
-.instruction:hover{
-  color:rgb(0, 153, 255);
+.instruction:hover {
+  color: rgb(0, 153, 255);
   transition: all 500ms ease;
   text-shadow: none;
 }
 
-.popup{
+.popup {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   top: 0;
   left: 0;
   opacity: 0;
   visibility: hidden;
 }
 
-.popup:target{
+.popup:target {
   opacity: 1;
   visibility: visible;
 }
-.popup:target .popup_content{
-  transform: translate(0px,0px);
+.popup:target .popup_content {
+  transform: translate(0px, 0px);
   opacity: 1;
 }
 
-.popup_body{
+.popup_body {
   min-height: 100%;
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: center;
   padding: 30px 10px;
 }
-.popup_content{
-  background-color: rgb(230, 230, 250,0.95);
+.popup_content {
+  background-color: rgb(230, 230, 250, 0.95);
   border: 3px solid rgb(0, 0, 0);
   color: black;
   max-width: 800px;
@@ -411,42 +409,40 @@ body {
   position: relative;
   transition: all 0.8s ease 0s;
   opacity: 0;
-  transform: perspective(600px) translate(0px,-100%) rotateX(45deg);
+  transform: perspective(600px) translate(0px, -100%) rotateX(45deg);
 }
-.popup_close{
+.popup_close {
   position: absolute;
   right: 20px;
   top: 10px;
   font-size: 35px;
-  color: black ;
+  color: black;
   font-family: sans-serif;
   text-decoration: none;
-  overflow-y:auto ;
+  overflow-y: auto;
   overflow-x: hidden;
   transition: all 0.5s ease 0s;
-  
 }
 .popup_close:hover {
-  color: rgb(251, 4, 4) ;
+  color: rgb(251, 4, 4);
 }
-.popup_text{
+.popup_text {
   text-align: center;
   font-family: sans-serif;
   font-size: 25px;
-  
 }
-.popup_title{
+.popup_title {
   text-align: center;
   font-size: 40px;
   font-family: sans-serif;
 }
 
-.etu_logo{
+.etu_logo {
   position: absolute;
-  left:10px;
-  top:10px;
-  height:80px;
-  width:80px;
+  left: 10px;
+  top: 10px;
+  height: 80px;
+  width: 80px;
   border-radius: 50%;
   background-image: url(logo-sin-krug.png);
   background-size: cover;

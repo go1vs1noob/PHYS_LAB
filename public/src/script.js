@@ -4,7 +4,6 @@ const cargo_mass = 0.0811; //всё в кг
 const I = 0.0005;
 const g = 9.806;
 
-
 var Stopwatch = function (elem, options) {
   /* СЕКУНДОМЕР. ЗАПРАШИВАЕТ ДАТУ И ЧЕРЕЗ ДЕЛЬТУ ОБНОВЛЯЕТ СЧЕТЧИК */
   var timer = createTimer(),
@@ -99,7 +98,6 @@ var timer = new Stopwatch(elem, { delay: 10 }); // <-- ИНИЦИАЛИЗИРУ�
 const GlobalCargobluePos = document.getElementById("cargo_blue").offsetTop; // ПОЛУЧАЕМ ПЕРВОНАЧАЛЬНЫЕ ПОЗИЦИЯ ПРАВОГО И ЛЕВОГО ГРУЗИКОВ ОТНОСИТЕЛЬНО
 const GlobalCargoredPos = document.getElementById("cargo_red").offsetTop; // ВЕРХА ЭКРАНА С ПОМОЩЬЮ offsetTop
 
-
 let button_start = document.getElementById("button_start");
 let button_reset = document.getElementById("button_reset");
 let button_weight_1 = document.getElementById("button_weight_1");
@@ -110,7 +108,7 @@ let thread_left = document.getElementById("thread_left");
 let thread_right = document.getElementById("thread_right");
 let wheel = document.getElementById("wheel");
 
-
+let moveWheel = 0;
 let added_mass = 0; // ИНИЦИАЛИЗИРУЕМ МАССУ, ДОБАВЛЕННУЮ ГРУЗИКАМИ
 let wht1_flag = 0; // ИНИЦИАЛИЗИРУЕМ ФЛАГИ, ОЗНАЧАЮЩИЕ, ЧТО ГРУЗИК X БЫЛ ВКЛЮЧЕН
 let wht2_flag = 0;
@@ -191,8 +189,6 @@ button_weight_4.addEventListener("click", (e) => {
   wht4_init();
 });
 
-
-
 function move() {
   let weight_1 = document.getElementById("weight_1"); // ИНИЦИАЛИЗИРУЕМ ГРУЗИКИ
   let weight_2 = document.getElementById("weight_2");
@@ -216,20 +212,29 @@ function move() {
   let pixelsToMove = 0; // На сколько пикселей двигать грузики при каждом вызове функции
   let sensorPos = sensor.offsetTop; // Позиция сенсора
 
-  let acceleration =getRandomNum(0.95,1.05)*(17 * (added_mass * g * (wheel_r * wheel_r) - M_tr * wheel_r)) /
-    (wheel_r * wheel_r * (2 * cargo_mass + added_mass + I /  (wheel_r*wheel_r))); // g = 9.8, 17px/cm, 81.1 = m;
-  
+  let acceleration =
+    (getRandomNum(0.95, 1.05) *
+      (17 * (added_mass * g * (wheel_r * wheel_r) - M_tr * wheel_r))) /
+    (wheel_r *
+      wheel_r *
+      (2 * cargo_mass + added_mass + I / (wheel_r * wheel_r))); // g = 9.8, 17px/cm, 81.1 = m;
+
   let animateInterval = setInterval(animate, 10); // Каждые 10мс вызывается функция animate(), пока не прирвём с помощью clearInterval(animate). Значение 10 можно менять
   timer.start(); // Запускаем секундомер
-  console.log(acceleration/17);
-  function animate() {
+  //console.log(acceleration / 17);
 
+  wheel.style.animation = "spin 3.721s ease-in";   // ПРАВИТЬ ЗДЕСЬ. ВМЕСТО 3.721 ЗАМЕРЯТЬ ПРИМЕРНО ЗА СКОЛЬКО КАЖДАЯ КОМБИНАЦИЯ ГРУЗОВ ДОЕЗЖАЕТ ВНИЗ
+  wheel.style.animationFillMode = "forwards";      // И РАСПИСАТЬ УСЛОВИЯ
+
+  function animate() {
     pixelsToMove = acceleration * timer.curr_time(); //равноуск. движ. t = 139 px/с^2 для m1 = 82.5, m2 =
-    
+
     if (currentCargoblue >= cargoToStop) {
       //Если правый грузик достиг места остановки,
       clearInterval(animateInterval); // то прерываем animate() [движение]  TODO: ПОФИКСИТЬ ВРЕЗАНИЕ В СТОЙКУ. СКОРЕЕ ВСЕГО ПРОИСХОДИТ, ПОТОМУ ЧТО ДВИГАЕТСЯ БОЛЬШЕ ЧЕМ НА 1 ПИКСЕЛЬ ЗА ИТЕРАЦИЮ
       button_reset.disabled = false; // КОГДА ГРУЗИК ОСТАНАВЛИВАЕТСЯ ПОЗВОЛЯЕМ ПОЛЬЗОВАТЕЛЮ СДЕЛАТЬ СБРОС
+      //  wheel.style.transform = "rotate(" + 260 + "deg)";
+      console.log(timer.curr_time());
     } else {
       if (currentCargoblue >= sensorPos - cargo_height) {
         //Если правый грузик достиг линии сенсора фотодатчика
@@ -248,7 +253,7 @@ function move() {
       currentThreadRight += pixelsToMove;
 
       timer.update(); // после преодоления фотосенсора, таймер на экране остановится. Но "внутри" мы его можем обновлять с помощью timer.update()
-      wheel.style.transform = "rotate(" + pixelsToMove * 6 * 17 + "deg)"; // двигаем колесо с помощью transform
+      //wheel.style.transform = "rotate(" + acceleration * timer.curr_time() * 17 + "deg)"; // двигаем колесо с помощью transform
 
       thread_right.style.height = currentThreadRight + "px"; //нить "правая" и "левая"
       thread_left.style.height = currentThreadLeft + "px";
@@ -278,6 +283,7 @@ function reset() {
   wht4_flag = 0;
   added_mass = 0;
   flag_sum = 0;
+  moveWheel = 0;
   pixelsToMoveAfterTimerStop = 0;
   wheel.style.transform = "rotate(" + 0 + "deg)"; //ресетим колесо
   timer.stop(); // Останавливаем таймер
