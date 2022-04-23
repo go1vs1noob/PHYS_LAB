@@ -225,19 +225,19 @@ function move() {
     wheelMoveCoefficient = 5.5 * 17;
   } else if (added_mass === 0.0028) {
     // 2
-    wheelMoveCoefficient = 3.75 * 17;
+    wheelMoveCoefficient = 3.89 * 17;
   } else if (added_mass === 0.0021) {
     // 3
-    wheelMoveCoefficient = 4.3 * 17;
+    wheelMoveCoefficient = 4.5 * 17;
   } else if (added_mass === 0.0043) {
     // 4
-    wheelMoveCoefficient = 3.1 * 17;
+    wheelMoveCoefficient = 3.15 * 17;
   } else if (Math.abs(added_mass - 0.0042) <= 0.0001) {
     // 1+2
-    wheelMoveCoefficient = 3.1 * 17;
+    wheelMoveCoefficient = 3.12 * 17;
   } else if (Math.abs(added_mass - 0.0035) <= 0.0001) {
     // 1+3
-    wheelMoveCoefficient = 3.35 * 17;
+    wheelMoveCoefficient = 3.38 * 17;
   } else if (Math.abs(added_mass - 0.0057) <= 0.0001) {
     // 1+4
     wheelMoveCoefficient = 2.7 * 17;
@@ -246,12 +246,11 @@ function move() {
     wheelMoveCoefficient = 2.85 * 17;
   } else if (Math.abs(added_mass - 0.0071) <= 0.0001) {
     // 2+4
-    wheelMoveCoefficient = 2.35 * 17;
+    wheelMoveCoefficient = 2.4 * 17;
   } else if (Math.abs(added_mass - 0.0064) <= 0.0001) {
     // 3+4
-    wheelMoveCoefficient = 2.50 * 17;
+    wheelMoveCoefficient = 2.5 * 17;
   }
-
   console.log(added_mass);
   let animateInterval = setInterval(animate, 10); // Каждые 10мс вызывается функция animate(), пока не прирвём с помощью clearInterval(animate). Значение 10 можно менять
   timer.start(); // Запускаем секундомер
