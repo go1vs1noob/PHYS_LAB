@@ -53,22 +53,7 @@ body {
   height: 210px;
   left: 495px;
 }
-@-moz-keyframes spin {
-  100% {
-    -moz-transform: rotate(260deg);
-  }
-}
-@-webkit-keyframes spin {
-  100% {
-    -webkit-transform: rotate(260deg);
-  }
-}
-@keyframes spin {
-  100% {
-    -webkit-transform: rotate(260deg);
-    transform: rotate(260deg);
-  }
-}
+
 #wheel_ruler {
   position: absolute;
   width: 122px;

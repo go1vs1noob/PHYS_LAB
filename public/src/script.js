@@ -213,18 +213,49 @@ function move() {
   let sensorPos = sensor.offsetTop; // Позиция сенсора
 
   let acceleration =
-    (getRandomNum(0.95, 1.05) *
+    (getRandomNum(0.97, 1.03) *
       (17 * (added_mass * g * (wheel_r * wheel_r) - M_tr * wheel_r))) /
     (wheel_r *
       wheel_r *
       (2 * cargo_mass + added_mass + I / (wheel_r * wheel_r))); // g = 9.8, 17px/cm, 81.1 = m;
 
+  let wheelMoveCoefficient = 0;
+  if (added_mass === 0.0014) {
+    // 1
+    wheelMoveCoefficient = 5.5 * 17;
+  } else if (added_mass === 0.0028) {
+    // 2
+    wheelMoveCoefficient = 3.75 * 17;
+  } else if (added_mass === 0.0021) {
+    // 3
+    wheelMoveCoefficient = 4.3 * 17;
+  } else if (added_mass === 0.0043) {
+    // 4
+    wheelMoveCoefficient = 3.1 * 17;
+  } else if (Math.abs(added_mass - 0.0042) <= 0.0001) {
+    // 1+2
+    wheelMoveCoefficient = 3.1 * 17;
+  } else if (Math.abs(added_mass - 0.0035) <= 0.0001) {
+    // 1+3
+    wheelMoveCoefficient = 3.35 * 17;
+  } else if (Math.abs(added_mass - 0.0057) <= 0.0001) {
+    // 1+4
+    wheelMoveCoefficient = 2.7 * 17;
+  } else if (Math.abs(added_mass - 0.0049) <= 0.0001) {
+    // 2+3
+    wheelMoveCoefficient = 2.85 * 17;
+  } else if (Math.abs(added_mass - 0.0071) <= 0.0001) {
+    // 2+4
+    wheelMoveCoefficient = 2.35 * 17;
+  } else if (Math.abs(added_mass - 0.0064) <= 0.0001) {
+    // 3+4
+    wheelMoveCoefficient = 2.50 * 17;
+  }
+
+  console.log(added_mass);
   let animateInterval = setInterval(animate, 10); // Каждые 10мс вызывается функция animate(), пока не прирвём с помощью clearInterval(animate). Значение 10 можно менять
   timer.start(); // Запускаем секундомер
   //console.log(acceleration / 17);
-
-  wheel.style.animation = "spin 3.721s ease-in";   // ПРАВИТЬ ЗДЕСЬ. ВМЕСТО 3.721 ЗАМЕРЯТЬ ПРИМЕРНО ЗА СКОЛЬКО КАЖДАЯ КОМБИНАЦИЯ ГРУЗОВ ДОЕЗЖАЕТ ВНИЗ
-  wheel.style.animationFillMode = "forwards";      // И РАСПИСАТЬ УСЛОВИЯ
 
   function animate() {
     pixelsToMove = acceleration * timer.curr_time(); //равноуск. движ. t = 139 px/с^2 для m1 = 82.5, m2 =
@@ -253,7 +284,10 @@ function move() {
       currentThreadRight += pixelsToMove;
 
       timer.update(); // после преодоления фотосенсора, таймер на экране остановится. Но "внутри" мы его можем обновлять с помощью timer.update()
-      //wheel.style.transform = "rotate(" + acceleration * timer.curr_time() * 17 + "deg)"; // двигаем колесо с помощью transform
+      wheel.style.transform =
+        "rotate(" +
+        wheelMoveCoefficient * acceleration * timer.curr_time() +
+        "deg)"; // двигаем колесо с помощью transform
 
       thread_right.style.height = currentThreadRight + "px"; //нить "правая" и "левая"
       thread_left.style.height = currentThreadLeft + "px";
