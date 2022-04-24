@@ -7,9 +7,9 @@ const g = 9.806;
 var Stopwatch = function (elem, options) {
   /* СЕКУНДОМЕР. ЗАПРАШИВАЕТ ДАТУ И ЧЕРЕЗ ДЕЛЬТУ ОБНОВЛЯЕТ СЧЕТЧИК */
   var timer = createTimer(),
-    offset,
-    clock,
-    interval;
+      offset,
+      clock,
+      interval;
 
   // default options
   options = options || {};
@@ -74,7 +74,7 @@ var Stopwatch = function (elem, options) {
 
   function delta() {
     var now = Date.now(),
-      d = now - offset;
+        d = now - offset;
 
     offset = now;
     return d;
@@ -123,9 +123,9 @@ dragElement(document.getElementById("draggable_ruler"));
 
 function dragElement(elmnt) {
   var pos1 = 0,
-    pos2 = 0,
-    pos3 = 0,
-    pos4 = 0;
+      pos2 = 0,
+      pos3 = 0,
+      pos4 = 0;
   /* otherwise, move the DIV from anywhere inside the DIV:*/
   elmnt.onmousedown = dragMouseDown;
 
@@ -213,44 +213,45 @@ function move() {
   let sensorPos = sensor.offsetTop; // Позиция сенсора
 
   let acceleration =
-    (getRandomNum(0.97, 1.03) *
-      (17 * (added_mass * g * (wheel_r * wheel_r) - M_tr * wheel_r))) /
-    (wheel_r *
-      wheel_r *
-      (2 * cargo_mass + added_mass + I / (wheel_r * wheel_r))); // g = 9.8, 17px/cm, 81.1 = m;
+      (getRandomNum(0.97, 1.03) *
+          (17 * (added_mass * g * (wheel_r * wheel_r) - M_tr * wheel_r))) /
+      (wheel_r *
+          wheel_r *
+          (2 * cargo_mass + added_mass + I / (wheel_r * wheel_r))); // g = 9.8, 17px/cm, 81.1 = m;
 
   let wheelMoveCoefficient = 0;
   if (added_mass === 0.0014) {
     // 1
-    wheelMoveCoefficient = 5.5 * 17;
+    wheelMoveCoefficient = 9.1 * 17;
   } else if (added_mass === 0.0028) {
     // 2
-    wheelMoveCoefficient = 3.89 * 17;
+    wheelMoveCoefficient = 6.5 * 17;
   } else if (added_mass === 0.0021) {
     // 3
-    wheelMoveCoefficient = 4.5 * 17;
+    wheelMoveCoefficient = 7.5 * 17;
   } else if (added_mass === 0.0043) {
     // 4
-    wheelMoveCoefficient = 3.15 * 17;
+    wheelMoveCoefficient = 5.11 * 17;
   } else if (Math.abs(added_mass - 0.0042) <= 0.0001) {
     // 1+2
-    wheelMoveCoefficient = 3.12 * 17;
+    wheelMoveCoefficient = 5.17 * 17;
   } else if (Math.abs(added_mass - 0.0035) <= 0.0001) {
     // 1+3
-    wheelMoveCoefficient = 3.38 * 17;
+    wheelMoveCoefficient = 5.63 * 17;
   } else if (Math.abs(added_mass - 0.0057) <= 0.0001) {
     // 1+4
-    wheelMoveCoefficient = 2.7 * 17;
+    wheelMoveCoefficient = 4.5 * 17;
   } else if (Math.abs(added_mass - 0.0049) <= 0.0001) {
     // 2+3
-    wheelMoveCoefficient = 2.85 * 17;
+    wheelMoveCoefficient = 4.79 * 17;
   } else if (Math.abs(added_mass - 0.0071) <= 0.0001) {
     // 2+4
-    wheelMoveCoefficient = 2.4 * 17;
+    wheelMoveCoefficient = 4.0 * 17;
   } else if (Math.abs(added_mass - 0.0064) <= 0.0001) {
     // 3+4
-    wheelMoveCoefficient = 2.5 * 17;
+    wheelMoveCoefficient = 4.23 * 17;
   }
+
   console.log(added_mass);
   let animateInterval = setInterval(animate, 10); // Каждые 10мс вызывается функция animate(), пока не прирвём с помощью clearInterval(animate). Значение 10 можно менять
   timer.start(); // Запускаем секундомер
@@ -284,9 +285,9 @@ function move() {
 
       timer.update(); // после преодоления фотосенсора, таймер на экране остановится. Но "внутри" мы его можем обновлять с помощью timer.update()
       wheel.style.transform =
-        "rotate(" +
-        wheelMoveCoefficient * acceleration * timer.curr_time() +
-        "deg)"; // двигаем колесо с помощью transform
+          "rotate(" +
+          wheelMoveCoefficient * acceleration * timer.curr_time()*currentThreadRight/1000 +
+          "deg)"; // двигаем колесо с помощью transform
 
       thread_right.style.height = currentThreadRight + "px"; //нить "правая" и "левая"
       thread_left.style.height = currentThreadLeft + "px";
@@ -329,14 +330,14 @@ function wht1_init() {
   if (flag_sum <= 1 && wht1_flag == 0) {
     let weight_1 = document.getElementById("weight_1"); // ПОЛУЧАЕМ ГРУЗИК
     weight_1.style.left =
-      document.getElementById("cargo_blue").offsetLeft + "px"; // ЛЕВАЯ ПОЗИЦИЯ (ТАКАЯ ЖЕ, КАК У СИНЕГО)
+        document.getElementById("cargo_blue").offsetLeft + "px"; // ЛЕВАЯ ПОЗИЦИЯ (ТАКАЯ ЖЕ, КАК У СИНЕГО)
     if (flag_sum == 1) {
       turn_off_weight_buttons();
       weight_1.style.top =
-        document.getElementById("cargo_blue").offsetTop - 40 + "px"; // TOP ПОЗИЦИЯ (КАК У СИНЕГО, НО МЕНЬШЕ НА 40 ЕСЛИ 1 ГРУЗИК УЖЕ ДОБАВЛЕН)
+          document.getElementById("cargo_blue").offsetTop - 40 + "px"; // TOP ПОЗИЦИЯ (КАК У СИНЕГО, НО МЕНЬШЕ НА 40 ЕСЛИ 1 ГРУЗИК УЖЕ ДОБАВЛЕН)
     } else {
       weight_1.style.top =
-        document.getElementById("cargo_blue").offsetTop - 20 + "px"; // TOP ПОЗИЦИЯ (КАК У СИНЕГО, НО МЕНЬШЕ НА 40 ЕСЛИ 0 ГРУЗИКОВ УЖЕ ДОБАВЛЕН)
+          document.getElementById("cargo_blue").offsetTop - 20 + "px"; // TOP ПОЗИЦИЯ (КАК У СИНЕГО, НО МЕНЬШЕ НА 40 ЕСЛИ 0 ГРУЗИКОВ УЖЕ ДОБАВЛЕН)
     }
     weight_1.style.visibility = "visible"; // ПОКАЗЫВАЕМ ЕГО
     added_mass += 0.0014; // МАССА И ФЛАГ, ЧТО ОН ВКЛЮЧЕН
@@ -349,14 +350,14 @@ function wht2_init() {
   if (flag_sum <= 1 && wht2_flag == 0) {
     let weight_2 = document.getElementById("weight_2");
     weight_2.style.left =
-      document.getElementById("cargo_blue").offsetLeft + "px";
+        document.getElementById("cargo_blue").offsetLeft + "px";
     if (flag_sum == 1) {
       turn_off_weight_buttons();
       weight_2.style.top =
-        document.getElementById("cargo_blue").offsetTop - 40 + "px";
+          document.getElementById("cargo_blue").offsetTop - 40 + "px";
     } else {
       weight_2.style.top =
-        document.getElementById("cargo_blue").offsetTop - 20 + "px";
+          document.getElementById("cargo_blue").offsetTop - 20 + "px";
     }
     weight_2.style.visibility = "visible";
     added_mass += 0.0028;
@@ -369,14 +370,14 @@ function wht3_init() {
   if (flag_sum <= 1 && wht3_flag == 0) {
     let weight_3 = document.getElementById("weight_3");
     weight_3.style.left =
-      document.getElementById("cargo_blue").offsetLeft + "px";
+        document.getElementById("cargo_blue").offsetLeft + "px";
     if (flag_sum == 1) {
       turn_off_weight_buttons();
       weight_3.style.top =
-        document.getElementById("cargo_blue").offsetTop - 40 + "px";
+          document.getElementById("cargo_blue").offsetTop - 40 + "px";
     } else {
       weight_3.style.top =
-        document.getElementById("cargo_blue").offsetTop - 20 + "px";
+          document.getElementById("cargo_blue").offsetTop - 20 + "px";
     }
     weight_3.style.visibility = "visible";
     added_mass += 0.0021;
@@ -388,14 +389,14 @@ function wht4_init() {
   if (flag_sum <= 1 && wht4_flag == 0) {
     let weight_4 = document.getElementById("weight_4");
     weight_4.style.left =
-      document.getElementById("cargo_blue").offsetLeft + "px";
+        document.getElementById("cargo_blue").offsetLeft + "px";
     if (flag_sum == 1) {
       turn_off_weight_buttons();
       weight_4.style.top =
-        document.getElementById("cargo_blue").offsetTop - 40 + "px";
+          document.getElementById("cargo_blue").offsetTop - 40 + "px";
     } else {
       weight_4.style.top =
-        document.getElementById("cargo_blue").offsetTop - 20 + "px";
+          document.getElementById("cargo_blue").offsetTop - 20 + "px";
     }
     weight_4.style.visibility = "visible";
     added_mass += 0.0043;
